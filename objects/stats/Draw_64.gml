@@ -1,0 +1,210 @@
+/// @description Insert description here
+// You can write your code in this editor
+var ballcaphit=false
+draw_circle(128+rowpos[0][0],32+rowpos[0][1],32,true)
+draw_circle(128+rowpos[1][0],32+64+rowpos[1][1],32,true)
+draw_rectangle(128-32+rowpos[2][0],128+rowpos[2][1],128+32+rowpos[2][0],64+128+rowpos[2][1],true)
+draw_circle(128+rowpos[3][0],96+128+rowpos[3][1],32,true)
+var num=0
+var notes=0
+var hit=false
+var ecs=camera_get_view_width(view_camera[0])/4
+if(os_type==os_android)
+{
+	repeat(4)
+	{
+		draw_line(ecs,0,ecs,room_height)
+		if(mouse_check_button_pressed(mb_left)&&device_mouse_x_to_gui(0)<ecs&&device_mouse_x_to_gui(0)>ecs-camera_get_view_width(view_camera[0])/4)
+		{
+			keyhit[num]=true
+		}
+		ecs+=camera_get_view_width(view_camera[0])/4
+		num+=1
+	}
+}
+num=0
+repeat(array_length(note))
+{
+	if(((-(cbeat-note[num][0])/mspeed)*room_width)+128<128-128&&note[num][1]!=3&&!note[num][2]&&arlorow!=note[num][1])
+	{
+		fc=false
+		if(!menuobj.badge[3].active||!bobnotes[num])
+		{
+			note[num][2]=true
+			array_push(accuracy,0)
+			misses+=1
+			rating="miss..."
+			combo=0
+			nnum=num+1
+		}
+		else
+		{
+			audio_play_sound(bobmiss,1000,false)
+			note[num][2]=true
+		}
+	}
+	if((((-(cbeat-note[num][0])/mspeed)*room_width)+128)<room_width&&(((-(cbeat-note[num][0])/mspeed)*room_width)+128)>0)
+	{
+		if(note[num][2])
+		{
+			var size=(((-(cbeat-note[num][0])/mspeed)*room_width)+128)/128
+			if(note[num][1]<2)
+			{
+				draw_circle(((-(cbeat-note[num][0])/mspeed)*room_width)+128+rowpos[note[num][1]][0],32+(note[num][1]*64)+rowpos[note[num][1]][1],(32+(note[num][1]*3))*size,note[num][1])
+			}
+			else
+			{
+				draw_rectangle(((-(cbeat-note[num][0])/mspeed)*room_width)+128-(32*size)+rowpos[note[num][1]][0],(32-(32*size))+128+rowpos[note[num][1]][1],((-(cbeat-note[num][0])/mspeed)*room_width)+128+(32*size)+rowpos[note[num][1]][0],(32+(32*size))+128+rowpos[note[num][1]][1],true)
+			}
+		}
+		if(((-(cbeat-note[num][0])/mspeed)*room_width)+128<128&&!note[num][3]&&note[num][1]!=3)
+		{
+			notes+=1
+			note[num][3]=true
+			audio_play_sound(asset_get_index("hit"+string(note[num][1]+1)),1000,false)
+		}
+		if(!note[num][2])
+		{
+			if(note[num][1]<2)
+			{
+				draw_circle(((-(cbeat-note[num][0])/mspeed)*room_width)+128+rowpos[note[num][1]][0],32+(note[num][1]*64)+rowpos[note[num][1]][1],32+(note[num][1]*3),note[num][1])
+			}
+			else if(note[num][1]==3)
+			{
+				draw_sprite(partialcirc,1,((-(cbeat-note[num][0])/mspeed)*room_width)+128+rowpos[note[num][1]][0],(32*note[num][4])+32+(note[num][1]*64)+rowpos[note[num][1]][1])
+			}
+			else
+			{
+				draw_rectangle((((-(cbeat-note[num][0])/mspeed)*room_width)+128-32)+rowpos[note[num][1]][0],(0+(note[num][1]*64))+rowpos[note[num][1]][1],(((-(cbeat-note[num][0])/mspeed)*room_width)+128+32)+rowpos[note[num][1]][0],(64+(note[num][1]*64))+rowpos[note[num][1]][1],true)
+			}
+			if(menuobj.badge[0].active&&ballcapcanhit)
+			{
+				draw_sprite(ballcapoverlay,0,((-(cbeat-note[num][0])/mspeed)*room_width)+128,32+(note[num][1]*64))
+			}
+			if(alarm[1]<=0&&menuobj.badge[8].active&&firenotes[num])
+			{
+				draw_sprite(fireoverlay,0,((-(cbeat-note[num][0])/mspeed)*room_width)+128,32+(note[num][1]*64))
+			}
+			if(alarm[1]<=0&&menuobj.badge[3].active&&bobnotes[num])
+			{
+				draw_sprite(boboverlay,0,((-(cbeat-note[num][0])/mspeed)*room_width)+128,32+(note[num][1]*64))
+			}
+			if(alarm[1]<=0&&menuobj.badge[9].active&&pugnotes[num])
+			{
+				draw_sprite(pugoverlay,0,((-(cbeat-note[num][0])/mspeed)*room_width)+128,32+(note[num][1]*64))
+			}
+			if(arlorow==note[num][1]&&menuobj.badge[11].active)
+			{
+				draw_sprite(arlodinky,0,64,32+(note[num][1]*64))
+			}
+			var leniencyl=leniency+((menuobj.badge[8].active&&firenotes[num])*64)+((menuobj.badge[9].active&&pugnotes[num])*64)
+			var leniencye=leniency+((menuobj.badge[8].active&&firenotes[num])*64)+((menuobj.badge[9].active&&pugnotes[num])*64)
+			draw_line(128-leniencyl,32+(note[num][1]*64),128+leniencyl,32+(note[num][1]*64))
+			if(((-(cbeat-note[num][0])/mspeed)*room_width)+128>128-leniencyl&&((-(cbeat-note[num][0])/mspeed)*room_width)+128<128+leniencyl&&!hit)
+			{
+				if(note[num][1]<array_length(keyhit)&&keyhit[note[num][1]]||menuobj.auto&&-(cbeat-note[num][0])>0||menuobj.badge[0].active&&ballcapcanhit&&-(cbeat-note[num][0])<0||doughits>0&&menuobj.badge[4].active)
+				{
+					doughits-=1
+					if(menuobj.badge[0].active&&ballcapcanhit&&-(cbeat-note[num][0])<0)
+					{
+						audio_play_sound(ballcaphitsfx,1000,false)
+						ballcaphit=true
+					}
+					ballcapcanhit=!ballcapcanhit
+					if(menuobj.auto)
+					{
+						ind=note[num][1]+1
+						image_index=6
+						alarm[0]=32
+						alt=!alt
+					}
+					if(zoom<=5)
+					{
+						zoom=5
+					}
+					array_push(accuracy,((cbeat-note[num][0])+1)*100)
+					if(((cbeat-note[num][0])+1)*100<80)
+					{
+						rating="offbeat..."
+					}
+					if(((cbeat-note[num][0])+1)*100>80)
+					{
+						rating="ok..."
+					}
+					if(((cbeat-note[num][0])+1)*100>90)
+					{
+						rating="good-"
+					}
+					if(((cbeat-note[num][0])+1)*100>95)
+					{
+						rating="superb!"
+					}
+					if(((cbeat-note[num][0])+1)*100>=100)
+					{
+						rating="amazing!"
+					}
+					rot=choose(22.5,-22.5)
+					size=1.5
+					if(note[num][1]!=3)
+					{
+						nnum=num+1
+						hit=true
+						note[num][2]=true
+					}
+					else
+					{
+						hit=true
+						audio_play_sound(asset_get_index("hit"+string(note[num][1]+1)),1000,false)
+					}
+					scorey+=((cbeat-note[num][0])+1)*100
+					if(menuobj.badge[6].active)
+					{
+						scorey+=((cbeat-note[num][0])+1)*100
+					}
+					if(menuobj.badge[9].active&&pugnotes[num])
+					{
+						scorey+=((cbeat-note[num][0])+1)*300
+					}
+					if(menuobj.badge[10].active)
+					{
+						scorey+=((cbeat-note[num][0])+1)*400
+					}
+					if(doughits<=0)
+					{
+						combo+=1+(menuobj.badge[6].active)+(menuobj.badge[8].active&&firenotes[num])
+						if(menuobj.badge[8].active&&firenotes[num])
+						{
+							audio_play_sound(firehit,1000,false)
+						}
+					}
+					if(combo>=100&&menuobj.badge[4].active)
+					{
+						combo=0
+						doughits=100
+					}
+				}
+			}
+		}
+	}
+	num+=1
+}
+if(notes>1)
+{
+	zoom=10
+}
+
+var num=0
+repeat(array_length(keyhit))
+{
+	if(keyhit[num])
+	{
+		arlorow=num
+	}
+	if(keyhit[num]&&!hit&&!ballcaphit)
+	{
+		misses+=1
+		rating="miss..."
+		break;
+	}
+	num+=1
+}
