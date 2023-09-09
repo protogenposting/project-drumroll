@@ -9,7 +9,7 @@ if(cbpm!=0&&room!=Room1)
 	var right = left + beatlen;
 	barper = remap(needle, left, right, 0, 1);
 	cbeat=barper+beat
-	if(frac(cbeat)<frac(oldcbeat))
+	if(frac(cbeat)<frac(oldcbeat)&&menuseleted==1)
 	{
 		sprite_index=choose(hitdrumright1,hitdrumleft1)
 		if(alt==2)
@@ -39,6 +39,5 @@ if(cbpm!=0&&room!=Room1)
 			alt=0
 		}
 	}
-	show_debug_message(cbeat)
 	draw_sprite(sprite_index,image_index,room_width/2,room_height/2)
 }

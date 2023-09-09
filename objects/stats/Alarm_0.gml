@@ -39,7 +39,7 @@ if(menuobj.badge[8].active&&array_length(firenotes)<=1)
 if(menuobj.badge[9].active&&array_length(pugnotes)<=1)
 {
 	var num=0
-	var beatid=1
+	var beatid=0
 	repeat(array_length(note)*4)
 	{
 		if(num==beatid)
@@ -57,5 +57,13 @@ if(menuobj.badge[9].active&&array_length(pugnotes)<=1)
 ind=0
 if(menuobj.badge[5].active)
 {
-	leniency=16
+	leniency=0.10
+}
+if(menuobj.badge[16].active)
+{
+	leniency=0.45
+}
+if(menuobj.badge[17].active)
+{
+	shift=-1
 }

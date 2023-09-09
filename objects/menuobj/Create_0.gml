@@ -4,7 +4,7 @@ randomize()
 alt=false
 offset=0
 song=Sound1
-songlist=[["energy island.txt","energy island.ogg",[0,0,0]],["uranus.txt","protogen posting - uranus.ogg",[0,0,0]],["spirals.txt","spirals.ogg",[0,0,0]],["be cool.txt","be cool.ogg",[0,0,0]]]
+songlist=[["energy island.txt","energy island.ogg",[0,0,0,0]],["uranus.txt","protogen posting - uranus.ogg",[0,0,0,0]],["spirals.txt","spirals.ogg",[0,0,0,0]],["be cool.txt","be cool.ogg",[0,0,0,0]],["weird.txt","weird.ogg",[0,0,0,0]],["failed experiment.txt","failed experiment.ogg",[0,0,0,0]],["Round5.txt","Round5.ogg",[0,0,0,0]]]
 
 smenu=0
 
@@ -57,7 +57,7 @@ badge[5]={
 	active: false,
 	level: 9,
 	sprite: badge7,
-	desc: "leniency decreased to 16, only allowing you to get superbs, amazings, and misses"
+	desc: "leniency decreased, only allowing you to get superbs, amazings, and misses"
 }
 badge[6]={
 	active: false,
@@ -104,8 +104,32 @@ badge[12]={
 badge[13]={
 	active: false,
 	level: 20,
-	sprite: badge13,
+	sprite: badge14,
 	desc: "matthew decides you need some more pain... if you lose your full combo, you are immediatly sent back to the menu!"
+}
+badge[14]={
+	active: false,
+	level: 25,
+	sprite: badge15,
+	desc: "bob from bots vs bob speeds up your song by 1.5x, but multiplies your score by 10x (stacks with invazion guy)"
+}
+badge[15]={
+	active: false,
+	level: 30,
+	sprite: badge16,
+	desc: "joseph adds more to your score the more combo you have"
+}
+badge[16]={
+	active: false,
+	level: 11,
+	sprite: badge18,
+	desc: "gives more leniency on all notes"
+}
+badge[17]={
+	active: false,
+	level: 10,
+	sprite: badge17,
+	desc: "shifts all notes up 1 beat"
 }
 xp=0
 
@@ -424,7 +448,7 @@ save_level=function(){
 			inst.note=_loadData.eventy
 			inst.bpm=_loadData.dbpm
 			inst.sid=songid
-			
+			array_sort(inst.note,sort_by_beat)
 			if(song!="")
 			{
 				var str1=song

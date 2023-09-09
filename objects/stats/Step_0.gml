@@ -2,6 +2,7 @@
 // You can write your code in this editor
 cbeat=0
 keyhit=[0,0,0,0]
+keyshit=[0,0,0,0]
 if(combo>lcombo)
 {
 	lcombo=combo
@@ -51,6 +52,14 @@ if(countdown<=0)
 		{
 			menuobj.songlist[sid][2][2]=lcombo
 		}
+		if(fc)
+		{
+			menuobj.songlist[sid][2][3]=2
+		}
+		else if(menuobj.songlist[sid][2][3]!=2)
+		{
+			menuobj.songlist[sid][2][3]=1
+		}
 		var xptogive=((lcombo/100)*(acc/100)*(scorey/1000)*(audio_sound_length(song)/20))/6
 		menuobj.xp+=xptogive*(!menuobj.auto)
 		menuobj.xpgained=xptogive*(!menuobj.auto)
@@ -70,6 +79,7 @@ if(countdown<=0)
 		played=true
 	}
 	keyhit=[keyboard_check_pressed(menuobj.bassbind[0])||keyboard_check_pressed(menuobj.bassbind[1])||keyboard_check_pressed(menuobj.bassbind[2]),keyboard_check_pressed(menuobj.snarebind[0])||keyboard_check_pressed(menuobj.snarebind[1])||keyboard_check_pressed(menuobj.snarebind[2]),keyboard_check_pressed(menuobj.cymbalbind),keyboard_check_pressed(menuobj.rollbind[0])||keyboard_check_pressed(menuobj.rollbind[1])]
+	morehits=false
 	var num=0
 	var ecs=camera_get_view_width(view_camera[0])/4
 	if(os_type==os_android)
@@ -117,13 +127,20 @@ if(countdown<=0)
 	{
 		audio_sound_pitch(aud,audio_sound_get_pitch(aud)+0.001)
 	}
+	if(menuobj.badge[14].active&&audio_sound_get_pitch(aud)<1.5)
+	{
+		audio_sound_pitch(aud,audio_sound_get_pitch(aud)+0.001)
+	}
+	if(menuobj.badge[14].active&&menuobj.badge[10].active&&audio_sound_get_pitch(aud)<2.5)
+	{
+		audio_sound_pitch(aud,audio_sound_get_pitch(aud)+0.001)
+	}
 	var barperlast=barper
 	var beatlen=60/bpm
 	var needle = audio_sound_get_track_position(aud)+menuobj.offset;
 	var left = beat * beatlen;
 	var right = left + beatlen;
 	barper = remap(needle, left, right, 0, 1);
-	show_debug_message([frac(barper),frac(barperlast)])
 	if(frac(barper)<frac(barperlast)&&menuobj.badge[12].active)
 	{
 		rowpost[rowsel]=[0,irandom(room_height-(rowsel*64))]
@@ -133,7 +150,7 @@ if(countdown<=0)
 			rowsel=0
 		}
 	}
-	cbeat=barper+beat
+	cbeat=(barper+beat)+shift
 }
 var num=0
 repeat(array_length(rowpos))

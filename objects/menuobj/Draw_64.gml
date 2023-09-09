@@ -21,10 +21,6 @@ if(room==menu)
 				break;
 			}
 		}
-		draw_rectangle(ecs-64-size,why-32-size,ecs+64+size,why+32+size,true)
-		draw_set_halign(fa_center)
-		draw_text(ecs,why,menunum[menuseleted][num].namey)
-		draw_set_halign(fa_left)
 		if(menuseleted==0)
 		{
 			if(!audio_is_playing(menutheme))
@@ -131,6 +127,8 @@ if(room==menu)
 				}
 				num+=1
 			}
+			ecs=128
+			why=128
 		}
 		if(menuseleted==3&&num==0)
 		{
@@ -138,8 +136,26 @@ if(room==menu)
 		}
 		if(menuseleted==1&&num>0)
 		{
-			draw_text(ecs+128,why,"delete")
-			draw_rectangle(ecs-64-size+128,why-32-size,ecs+64+size+128,why+32+size,true)
+			if(array_length(songlist[menunum[menuseleted][num].nummy][2])<=3)
+			{
+				array_push(songlist[menunum[menuseleted][num].nummy][2],0)
+			}
+			if(songlist[menunum[menuseleted][num].nummy][2][3]==2)
+			{
+				draw_set_color(c_aqua)
+			}
+			else if(songlist[menunum[menuseleted][num].nummy][2][3]==1)
+			{
+				draw_set_color(c_green)
+			}
+			else
+			{
+				draw_set_color(c_gray)
+			}
+			draw_rectangle(ecs-256-size+128,why-32-size,ecs+256+size+128,why+64+size,false)
+			draw_set_color(c_white)
+			draw_text(ecs+128,why-32,"delete")
+			draw_rectangle(ecs-64-size+130,why-32-size,ecs+64+size+130,why+32+size,true)
 			if(point_in_rectangle(mouse_x,mouse_y,ecs-64-size+128,why-32-size,ecs+64+size+128,why+32+size)&&mouse_check_button_pressed(mb_left))
 			{
 				array_delete(songlist,menunum[menuseleted][num].nummy,1)
@@ -271,6 +287,17 @@ if(room==menu)
 			draw_text_ext(ecs+512,why-64,"beat: "+string(cbeat),16,1024)
 			draw_text_ext(ecs+512,why-32,"zoom: "+string(beatzoom),16,1024)
 		}
+		draw_set_color(c_gray)
+		draw_rectangle(ecs-64-size,why-32-size,ecs+64+size,why+32+size,false)
+		draw_set_color(c_white)
+		draw_rectangle(ecs-64-size,why-32-size,ecs+64+size,why+32+size,true)
+		draw_set_color(c_white)
+		draw_set_halign(fa_center)
+		if(num<array_length(menunum[menuseleted]))
+		{
+			draw_text(ecs,why,menunum[menuseleted][num].namey)
+		}
+		draw_set_halign(fa_left)
 		num+=1
 		why+=90
 		if(why>room_height/1.1)

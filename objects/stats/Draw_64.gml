@@ -5,10 +5,12 @@ draw_circle(128+rowpos[0][0],32+rowpos[0][1],32,true)
 draw_circle(128+rowpos[1][0],32+64+rowpos[1][1],32,true)
 draw_rectangle(128-32+rowpos[2][0],128+rowpos[2][1],128+32+rowpos[2][0],64+128+rowpos[2][1],true)
 draw_circle(128+rowpos[3][0],96+128+rowpos[3][1],32,true)
+draw_text(256,32,am)
 var num=0
 var notes=0
-var hit=false
+hit=false
 var ecs=camera_get_view_width(view_camera[0])/4
+var oldscore=scorey
 if(os_type==os_android)
 {
 	repeat(4)
@@ -25,7 +27,9 @@ if(os_type==os_android)
 num=0
 repeat(array_length(note))
 {
-	if(((-(cbeat-note[num][0])/mspeed)*room_width)+128<128-128&&note[num][1]!=3&&!note[num][2]&&arlorow!=note[num][1])
+	var leniencyl=leniency+((menuobj.badge[8].active&&firenotes[num])*0.1)+((menuobj.badge[9].active&&pugnotes[num])*0.1)
+	var leniencye=leniency+((menuobj.badge[8].active&&firenotes[num])*0.1)+((menuobj.badge[9].active&&pugnotes[num])*0.1)
+	if(-(cbeat-note[num][0])<-leniencyl&&note[num][1]!=3&&!note[num][2]&&arlorow!=note[num][1])
 	{
 		fc=false
 		if(!menuobj.badge[3].active||!bobnotes[num])
@@ -57,7 +61,7 @@ repeat(array_length(note))
 				draw_rectangle(((-(cbeat-note[num][0])/mspeed)*room_width)+128-(32*size)+rowpos[note[num][1]][0],(32-(32*size))+128+rowpos[note[num][1]][1],((-(cbeat-note[num][0])/mspeed)*room_width)+128+(32*size)+rowpos[note[num][1]][0],(32+(32*size))+128+rowpos[note[num][1]][1],true)
 			}
 		}
-		if(((-(cbeat-note[num][0])/mspeed)*room_width)+128<128&&!note[num][3]&&note[num][1]!=3)
+		if(-(cbeat-note[num][0])<0&&!note[num][3]&&note[num][1]!=3)
 		{
 			notes+=1
 			note[num][3]=true
@@ -97,13 +101,12 @@ repeat(array_length(note))
 			{
 				draw_sprite(arlodinky,0,64,32+(note[num][1]*64))
 			}
-			var leniencyl=leniency+((menuobj.badge[8].active&&firenotes[num])*64)+((menuobj.badge[9].active&&pugnotes[num])*64)
-			var leniencye=leniency+((menuobj.badge[8].active&&firenotes[num])*64)+((menuobj.badge[9].active&&pugnotes[num])*64)
-			draw_line(128-leniencyl,32+(note[num][1]*64),128+leniencyl,32+(note[num][1]*64))
-			if(((-(cbeat-note[num][0])/mspeed)*room_width)+128>128-leniencyl&&((-(cbeat-note[num][0])/mspeed)*room_width)+128<128+leniencyl&&!hit)
+			draw_line(128-(leniencyl*256),32+((note[num][1])*64),128+(leniencye*256),32+((note[num][1])*64))
+			if(-(cbeat-note[num][0])>-leniencyl&&-(cbeat-note[num][0])<leniencye&&!keyshit[note[num][1]])
 			{
-				if(note[num][1]<array_length(keyhit)&&keyhit[note[num][1]]||menuobj.auto&&-(cbeat-note[num][0])>0||menuobj.badge[0].active&&ballcapcanhit&&-(cbeat-note[num][0])<0||doughits>0&&menuobj.badge[4].active)
+				if(note[num][1]<array_length(keyhit)&&keyhit[note[num][1]]||menuobj.auto&&((cbeat-note[num][0])+1)*100>100||menuobj.badge[0].active&&ballcapcanhit&&-(cbeat-note[num][0])<0||doughits>0&&menuobj.badge[4].active)
 				{
+					keyshit[note[num][1]]=1
 					doughits-=1
 					if(menuobj.badge[0].active&&ballcapcanhit&&-(cbeat-note[num][0])<0)
 					{
@@ -169,6 +172,15 @@ repeat(array_length(note))
 					{
 						scorey+=((cbeat-note[num][0])+1)*400
 					}
+					if(menuobj.badge[14].active)
+					{
+						scorey+=((cbeat-note[num][0])+1)*900
+					}
+					if(menuobj.badge[15].active)
+					{
+						scorey+=((cbeat-note[num][0])+1)*(combo)
+					}
+					am=string(-(oldscore-scorey))
 					if(doughits<=0)
 					{
 						combo+=1+(menuobj.badge[6].active)+(menuobj.badge[8].active&&firenotes[num])
@@ -182,6 +194,7 @@ repeat(array_length(note))
 						combo=0
 						doughits=100
 					}
+					keyhit[note[num][1]]=false
 				}
 			}
 		}
@@ -192,6 +205,7 @@ if(notes>1)
 {
 	zoom=10
 }
+
 
 var num=0
 repeat(array_length(keyhit))
@@ -208,3 +222,53 @@ repeat(array_length(keyhit))
 	}
 	num+=1
 }
+if(fc&&alarm[3]>0)
+{
+	draw_text_ext_transformed((room_width/2),(room_height/2),"FULL COMBOOOOOOO",9999,99999,5,5,irandom_range(-15,15))
+}
+draw_set_halign(fa_center)
+var num=0
+var ecs=(camera_get_view_width(view_camera[0])/4)*3
+var why=room_height/2
+repeat(array_length(menuobj.bassbind))
+{
+	var pressing=keyboard_check(menuobj.bassbind[num])
+	draw_sprite(basskeyicon,pressing,ecs,why)
+	draw_text(ecs+32,why+32,string(num))
+	ecs+=64+16
+	num+=1
+}
+num=0
+ecs=(camera_get_view_width(view_camera[0])/4)*3
+why+=64+16
+repeat(array_length(menuobj.snarebind))
+{
+	var pressing=keyboard_check(menuobj.snarebind[num])
+	draw_sprite(cymbalkeyicon,pressing,ecs,why)
+	draw_text(ecs+32,why+32,string(num))
+	ecs+=64+16
+	num+=1
+}
+num=0
+ecs=(camera_get_view_width(view_camera[0])/4)*3
+why+=64+16
+repeat(1)
+{
+	var pressing=keyboard_check(menuobj.cymbalbind)
+	draw_sprite(drumrollkeyicon,pressing,ecs,why)
+	draw_text(ecs+32,why+32,string(num))
+	ecs+=64+16
+	num+=1
+}
+num=0
+ecs=(camera_get_view_width(view_camera[0])/4)*3
+why+=64+16
+repeat(array_length(menuobj.rollbind))
+{
+	var pressing=keyboard_check(menuobj.rollbind[num])
+	draw_sprite(snarekeyicon,pressing,ecs,why)
+	draw_text(ecs+32,why+32,string(num))
+	ecs+=64+16
+	num+=1
+}
+draw_set_halign(fa_left)

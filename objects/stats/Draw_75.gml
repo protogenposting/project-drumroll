@@ -1,7 +1,11 @@
 /// @description Insert description here
 // You can write your code in this editor
 
-
+if(hit)
+{
+	nhit=keyhit
+	morehits=true
+}
 if(menuobj.badge[6].active&&audio_is_playing(song))
 {
 	var songper=(audio_sound_get_track_position(aud)+menuobj.offset)/audio_sound_length(song)
