@@ -1,7 +1,7 @@
 /// @description Insert description here
 // You can write your code in this editor
 beatzoom=zooms[zselected]
-if(room==menu)
+if(room==menu&&alarm[0]<=0)
 {
 	draw_set_font(Font12)
 	var num=0

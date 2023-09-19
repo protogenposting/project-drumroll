@@ -8,7 +8,7 @@ repeat(2)
 	num+=1
 }
 sprnum+=1
-audio_play_sound(asset_get_index("hit"+string(countdown)),1000,false)
+audio_play_sound(hit3,1000,false)
 countdown-=1
 if(sprnum<array_length(sprite))
 {

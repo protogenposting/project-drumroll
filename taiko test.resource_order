@@ -52,6 +52,7 @@
     {"name":"hit4","order":4,"path":"sounds/hit4/hit4.yy",},
     {"name":"badge4","order":5,"path":"sprites/badge4/badge4.yy",},
     {"name":"badge16","order":20,"path":"sprites/badge16/badge16.yy",},
+    {"name":"enter","order":14,"path":"sprites/enter/enter.yy",},
     {"name":"hitdrumright1","order":2,"path":"sprites/hitdrumright1/hitdrumright1.yy",},
     {"name":"basskeyicon","order":1,"path":"sprites/basskeyicon/basskeyicon.yy",},
     {"name":"hit2","order":2,"path":"sounds/hit2/hit2.yy",},
