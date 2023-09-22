@@ -23,7 +23,7 @@ if(room==menu&&alarm[0]<=0)
 		}
 		if(menuseleted==0)
 		{
-			if(!audio_is_playing(menutheme))
+			if(!audio_is_playing(menutheme)&&alarm[0]<=0)
 			{
 				audio_stop_all()
 				audio_play_sound(menutheme,1000,true)
