@@ -79,6 +79,19 @@ if(countdown<=0)
 		played=true
 	}
 	keyhit=[keyboard_check_pressed(menuobj.bassbind[0])||keyboard_check_pressed(menuobj.bassbind[1])||keyboard_check_pressed(menuobj.bassbind[2]),keyboard_check_pressed(menuobj.snarebind[0])||keyboard_check_pressed(menuobj.snarebind[1])||keyboard_check_pressed(menuobj.snarebind[2]),keyboard_check_pressed(menuobj.cymbalbind),keyboard_check_pressed(menuobj.rollbind[0])||keyboard_check_pressed(menuobj.rollbind[1])]
+	var playerdeviceconnected=0
+	if(gamepad_is_connected(4))
+	{
+		var playerdeviceconnected=4
+	}
+	if(gamepad_is_connected(5))
+	{
+		var playerdeviceconnected=5
+	}
+	if(gamepad_is_connected(playerdeviceconnected))
+	{
+		keyhit=[gamepad_button_check_pressed(playerdeviceconnected,gp_face1),gamepad_button_check_pressed(playerdeviceconnected,gp_face2),gamepad_button_check_pressed(playerdeviceconnected,gp_face3),gamepad_button_check_pressed(playerdeviceconnected,gp_face4)]
+	}
 	morehits=false
 	var num=0
 	var ecs=camera_get_view_width(view_camera[0])/4
