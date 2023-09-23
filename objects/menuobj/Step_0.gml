@@ -11,10 +11,10 @@ if(gamepad_is_connected(5))
 }
 if(gamepad_is_connected(playerdeviceconnected))
 {
-	var haxis = gamepad_axis_value(playerdeviceconnected, gp_axislh);
+	var haxis = gamepad_axis_value(playerdeviceconnected, gp_axislh)*5;
 	
-	var vaxis = gamepad_axis_value(playerdeviceconnected, gp_axislv);
-	display_mouse_set(display_mouse_get_x()+haxis,display_mouse_get_x()+vaxis)
+	var vaxis = gamepad_axis_value(playerdeviceconnected, gp_axislv)*5;
+	display_mouse_set(display_mouse_get_x()+haxis,display_mouse_get_y()+vaxis)
 }
 xptonextlevel=10+((level-1)*4)
 if(xp>=xptonextlevel)
