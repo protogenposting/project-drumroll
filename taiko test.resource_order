@@ -60,7 +60,6 @@
     {"name":"badge9","order":10,"path":"sprites/badge9/badge9.yy",},
     {"name":"boboverlay","order":4,"path":"sprites/boboverlay/boboverlay.yy",},
     {"name":"hitsnareleft1","order":5,"path":"sprites/hitsnareleft1/hitsnareleft1.yy",},
-    {"name":"menutheme","order":5,"path":"sounds/menutheme/menutheme.yy",},
     {"name":"badge15","order":19,"path":"sprites/badge15/badge15.yy",},
     {"name":"pugoverlay","order":12,"path":"sprites/pugoverlay/pugoverlay.yy",},
     {"name":"hitsnareright1","order":6,"path":"sprites/hitsnareright1/hitsnareright1.yy",},

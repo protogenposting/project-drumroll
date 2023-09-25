@@ -45,3 +45,4 @@ menunum[3]=[
 		menuobj.menuseleted=0
 	}},
 ]
+menutheme=audio_create_stream(songlist[irandom(array_length(songlist)-1)][1])
