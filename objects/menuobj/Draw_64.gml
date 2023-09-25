@@ -15,7 +15,16 @@ if(room==menu&&alarm[0]<=0)
 		{
 			smenu=num
 			size=4
-			if(mouse_check_button_pressed(mb_left))
+			var playerdeviceconnected=0
+			if(gamepad_is_connected(4))
+			{
+				var playerdeviceconnected=4
+			}
+			if(gamepad_is_connected(5))
+			{
+				var playerdeviceconnected=5
+			}
+			if(mouse_check_button_pressed(mb_left)||gamepad_button_check_pressed(playerdeviceconnected,gp_face1))
 			{
 				menunum[menuseleted][num].func()
 				break;
@@ -84,7 +93,7 @@ if(room==menu&&alarm[0]<=0)
 				draw_circle(ecs,why,32,true)
 				if(point_in_circle(mouse_x,mouse_y,ecs,why,32))
 				{
-					if(mouse_check_button(mb_left))
+					if(mouse_check_button(mb_left)||gamepad_button_check_pressed(playerdeviceconnected,gp_face1))
 					{
 						badges[num]=0
 					}
