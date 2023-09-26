@@ -90,7 +90,7 @@ if(countdown<=0)
 	}
 	if(gamepad_is_connected(playerdeviceconnected))
 	{
-		keyhit=[gamepad_button_check_pressed(playerdeviceconnected,gp_face1),gamepad_button_check_pressed(playerdeviceconnected,gp_face2),gamepad_button_check_pressed(playerdeviceconnected,gp_face3),gamepad_button_check_pressed(playerdeviceconnected,gp_face4)]
+		keyhit=[gamepad_button_check_pressed(4,gp_face1)||gamepad_button_check_pressed(5,gp_face1),gamepad_button_check_pressed(4,gp_face2)||gamepad_button_check_pressed(5,gp_face2),gamepad_button_check_pressed(4,gp_face3)||gamepad_button_check_pressed(5,gp_face3),gamepad_button_check_pressed(4,gp_face4)||gamepad_button_check_pressed(5,gp_face4)]
 	}
 	morehits=false
 	var num=0
