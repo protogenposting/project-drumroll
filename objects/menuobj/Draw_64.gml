@@ -1,5 +1,6 @@
 /// @description Insert description here
 // You can write your code in this editor
+var playerdeviceconnected=0
 beatzoom=zooms[zselected]
 if(room==menu&&alarm[0]<=0)
 {
@@ -314,7 +315,7 @@ if(room==menu&&alarm[0]<=0)
 			ecs+=128
 			if(menuseleted==1)
 			{
-				ecs+=256
+				ecs+=256+128
 			}
 			why=128
 		}

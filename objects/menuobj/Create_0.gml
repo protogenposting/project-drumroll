@@ -226,6 +226,15 @@ menunum[0]=[
 	{namey: "settings",func: function(){
 		menu.menuseleted=5
 	}},
+	{namey: "save",func: function(){
+		with(menu)
+		{
+			save_story_levels()
+		}
+	}},
+	{namey: "exit",func: function(){
+		game_end()
+	}},
 ]
 menunum[1]=[
 	{namey: "back",func: function(){
