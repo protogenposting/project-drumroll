@@ -12,17 +12,17 @@ songlist=[["energy island.txt","energy island.ogg",[0,0,0,0]],["uranus.txt","pro
 smenu=0
 
 bassbind[0]=ord("A")
-bassbind[1]=ord("S")
-bassbind[2]=ord("D")
+bassbind[1]=ord("Q")
+bassbind[2]=ord("Q")
 
-snarebind[0]=ord("J")
-snarebind[1]=ord("K")
-snarebind[2]=ord("L")
+snarebind[0]=ord("S")
+snarebind[1]=ord("Q")
+snarebind[2]=ord("Q")
 
-cymbalbind=ord("C")
+cymbalbind=ord("K")
 
-rollbind[0]=ord("N")
-rollbind[1]=ord("M")
+rollbind[0]=ord("L")
+rollbind[1]=ord("Q")
 
 badges=[0,0]
 
