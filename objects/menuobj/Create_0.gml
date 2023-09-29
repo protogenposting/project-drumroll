@@ -6,6 +6,7 @@ alt=false
 offset=0
 song=Sound1
 downscroll=false
+arrows=false
 songlist=[["energy island.txt","energy island.ogg",[0,0,0,0]],["uranus.txt","protogen posting - uranus.ogg",[0,0,0,0]],["spirals.txt","spirals.ogg",[0,0,0,0]],["be cool.txt","be cool.ogg",[0,0,0,0]],["weird.txt","weird.ogg",[0,0,0,0]],["polyrights.txt","polyrights.ogg",[0,0,0,0]],["failed experiment.txt","failed experiment.ogg",[0,0,0,0]],["Round5.txt","Round5.ogg",[0,0,0,0]]]
 
 smenu=0
@@ -363,6 +364,10 @@ menunum[5]=[
 	{namey: "upscroll "+string(menuobj.downscroll),func: function(){
 		menuobj.downscroll=!menuobj.downscroll
 		namey= "upscroll "+string(menuobj.downscroll)
+	}},
+	{namey: "arrows "+string(menuobj.arrows),func: function(){
+		menuobj.arrows=!menuobj.arrows
+		namey= "upscroll "+string(menuobj.arrows)
 	}},
 	{namey: "reset save data",func: function(){
 		file_delete("save.pt")
