@@ -1,11 +1,22 @@
 /// @description Insert description here
 // You can write your code in this editor
 var ballcaphit=false
-draw_circle(128+rowpos[0][0],32+rowpos[0][1],32,true)
-draw_circle(128+rowpos[1][0],32+64+rowpos[1][1],32,true)
-draw_rectangle(128-32+rowpos[2][0],128+rowpos[2][1],128+32+rowpos[2][0],64+128+rowpos[2][1],true)
-draw_circle(128+rowpos[3][0],96+128+rowpos[3][1],32,true)
-draw_text(256,32,am)
+if(!menuobj.downscroll)
+{
+	draw_circle(128+rowpos[0][0],32+rowpos[0][1],32,true)
+	draw_circle(128+rowpos[1][0],32+64+rowpos[1][1],32,true)
+	draw_rectangle(128-32+rowpos[2][0],128+32+rowpos[2][1]-32,128+32+rowpos[2][0],128+32+rowpos[2][1]+32,true)
+	draw_rectangle(128-32+rowpos[2][0],128+64+rowpos[2][1],128+32+rowpos[2][0],128+128+rowpos[2][1],true)
+	draw_text(256,32,am)
+}
+else
+{
+	draw_circle(32+rowpos[0][1],128+rowpos[0][0],32,true)
+	draw_circle(32+64+rowpos[1][1],128+rowpos[1][0],32,true)
+	draw_rectangle(128+32+rowpos[2][1]-32,128-32+rowpos[2][0],128+32+rowpos[2][1]+32,128+32+rowpos[2][0],true)
+	draw_rectangle(128+64+rowpos[2][1],128-32+rowpos[2][0],128+128+rowpos[2][1],128+32+rowpos[2][0],true)
+	draw_text(256,32,am)
+}
 var num=0
 var notes=0
 hit=false
@@ -47,62 +58,130 @@ repeat(array_length(note))
 			note[num][2]=true
 		}
 	}
-	if((((-(cbeat-note[num][0])/mspeed)*room_width)+128)<room_width&&(((-(cbeat-note[num][0])/mspeed)*room_width)+128)>0)
+	var cares=false
+	if(!menuobj.downscroll)
 	{
-		if(note[num][2])
+		if((((-(cbeat-note[num][0])/mspeed)*room_width)+128)<room_width&&(((-(cbeat-note[num][0])/mspeed)*room_width)+128)>0)
 		{
-			var size=(((-(cbeat-note[num][0])/mspeed)*room_width)+128)/128
-			if(note[num][1]<2)
+			cares=true
+			if(note[num][2])
 			{
-				draw_circle(((-(cbeat-note[num][0])/mspeed)*room_width)+128+rowpos[note[num][1]][0],32+(note[num][1]*64)+rowpos[note[num][1]][1],(32+(note[num][1]*3))*size,note[num][1])
+				var size=(((-(cbeat-note[num][0])/mspeed)*room_width)+128)/128
+				if(note[num][1]<2)
+				{
+					draw_circle(((-(cbeat-note[num][0])/mspeed)*room_width)+128+rowpos[note[num][1]][0],32+(note[num][1]*64)+rowpos[note[num][1]][1],(32+(note[num][1]*3))*size,note[num][1])
+				}
+				else
+				{
+					draw_rectangle(((-(cbeat-note[num][0])/mspeed)*room_width)+128-(32*size)+rowpos[note[num][1]][0],(32-(32*size))+128+rowpos[note[num][1]][1],((-(cbeat-note[num][0])/mspeed)*room_width)+128+(32*size)+rowpos[note[num][1]][0],(32+(32*size))+128+rowpos[note[num][1]][1],true)
+				}
 			}
-			else
+			if(-(cbeat-note[num][0])<0&&!note[num][3]&&note[num][1]!=3)
 			{
-				draw_rectangle(((-(cbeat-note[num][0])/mspeed)*room_width)+128-(32*size)+rowpos[note[num][1]][0],(32-(32*size))+128+rowpos[note[num][1]][1],((-(cbeat-note[num][0])/mspeed)*room_width)+128+(32*size)+rowpos[note[num][1]][0],(32+(32*size))+128+rowpos[note[num][1]][1],true)
+				notes+=1
+				note[num][3]=true
+				audio_play_sound(asset_get_index("hit"+string(note[num][1]+1)),1000,false)
+			}
+			if(!note[num][2])
+			{
+				if(note[num][1]<2)
+				{
+					draw_circle(((-(cbeat-note[num][0])/mspeed)*room_width)+128+rowpos[note[num][1]][0],32+(note[num][1]*64)+rowpos[note[num][1]][1],32+(note[num][1]*3),note[num][1])
+				}
+				else if(note[num][1]==3)
+				{
+					draw_sprite(partialcirc,1,((-(cbeat-note[num][0])/mspeed)*room_width)+128+rowpos[note[num][1]][0],(32*note[num][4])+32+(note[num][1]*64)+rowpos[note[num][1]][1])
+				}
+				else
+				{
+					draw_rectangle((((-(cbeat-note[num][0])/mspeed)*room_width)+128-32)+rowpos[note[num][1]][0],(0+(note[num][1]*64))+rowpos[note[num][1]][1],(((-(cbeat-note[num][0])/mspeed)*room_width)+128+32)+rowpos[note[num][1]][0],(64+(note[num][1]*64))+rowpos[note[num][1]][1],true)
+				}
+				if(menuobj.badge[0].active&&ballcapcanhit)
+				{
+					draw_sprite(ballcapoverlay,0,((-(cbeat-note[num][0])/mspeed)*room_width)+128,32+(note[num][1]*64))
+				}
+				if(alarm[1]<=0&&menuobj.badge[8].active&&firenotes[num])
+				{
+					draw_sprite(fireoverlay,0,((-(cbeat-note[num][0])/mspeed)*room_width)+128,32+(note[num][1]*64))
+				}
+				if(alarm[1]<=0&&menuobj.badge[3].active&&bobnotes[num])
+				{
+					draw_sprite(boboverlay,0,((-(cbeat-note[num][0])/mspeed)*room_width)+128,32+(note[num][1]*64))
+				}
+				if(alarm[1]<=0&&menuobj.badge[9].active&&pugnotes[num])
+				{
+					draw_sprite(pugoverlay,0,((-(cbeat-note[num][0])/mspeed)*room_width)+128,32+(note[num][1]*64))
+				}
+				if(arlorow==note[num][1]&&menuobj.badge[11].active)
+				{
+					draw_sprite(arlodinky,0,64,32+(note[num][1]*64))
+				}
+				draw_line(128-(leniencyl*256),32+((note[num][1])*64),128+(leniencye*256),32+((note[num][1])*64))
 			}
 		}
-		if(-(cbeat-note[num][0])<0&&!note[num][3]&&note[num][1]!=3)
+	}
+	else
+	{
+		if((((-(cbeat-note[num][0])/mspeed)*room_height)+128)<room_height&&(((-(cbeat-note[num][0])/mspeed)*room_height)+128)>0)
 		{
-			notes+=1
-			note[num][3]=true
-			audio_play_sound(asset_get_index("hit"+string(note[num][1]+1)),1000,false)
+			cares=true
+			if(note[num][2])
+			{
+				var size=(((-(cbeat-note[num][0])/mspeed)*room_height)+128)/128
+				if(note[num][1]<2)
+				{
+					draw_circle(32+(note[num][1]*64)+rowpos[note[num][1]][1],((-(cbeat-note[num][0])/mspeed)*room_width)+128+rowpos[note[num][1]][0],(32+(note[num][1]*3))*size,note[num][1])
+				}
+				else
+				{
+					draw_rectangle((32-(32*size))+128+rowpos[note[num][1]][1],((-(cbeat-note[num][0])/mspeed)*room_width)+128-(32*size)+rowpos[note[num][1]][0],(32+(32*size))+128+rowpos[note[num][1]][1],((-(cbeat-note[num][0])/mspeed)*room_width)+128+(32*size)+rowpos[note[num][1]][0],true)
+				}
+			}
+			if(-(cbeat-note[num][0])<0&&!note[num][3]&&note[num][1]!=3)
+			{
+				notes+=1
+				note[num][3]=true
+				audio_play_sound(asset_get_index("hit"+string(note[num][1]+1)),1000,false)
+			}
+			if(!note[num][2])
+			{
+				if(note[num][1]<2)
+				{
+					draw_circle(32+(note[num][1]*64)+rowpos[note[num][1]][1],((-(cbeat-note[num][0])/mspeed)*room_width)+128+rowpos[note[num][1]][0],32+(note[num][1]*3),note[num][1])
+				}
+				else if(note[num][1]==3)
+				{
+					draw_sprite(partialcirc,1,(32*note[num][4])+32+(note[num][1]*64)+rowpos[note[num][1]][1],((-(cbeat-note[num][0])/mspeed)*room_width)+128+rowpos[note[num][1]][0])
+				}
+				else
+				{
+					draw_rectangle((0+(note[num][1]*64))+rowpos[note[num][1]][1],(((-(cbeat-note[num][0])/mspeed)*room_width)+128-32)+rowpos[note[num][1]][0],(64+(note[num][1]*64))+rowpos[note[num][1]][1],(((-(cbeat-note[num][0])/mspeed)*room_width)+128+32)+rowpos[note[num][1]][0],true)
+				}
+				if(menuobj.badge[0].active&&ballcapcanhit)
+				{
+					draw_sprite(ballcapoverlay,0,32+(note[num][1]*64),((-(cbeat-note[num][0])/mspeed)*room_width)+128)
+				}
+				if(alarm[1]<=0&&menuobj.badge[8].active&&firenotes[num])
+				{
+					draw_sprite(fireoverlay,0,32+note[num][1]*64,((-(cbeat-note[num][0])/mspeed)*room_width)+128)
+				}
+				if(alarm[1]<=0&&menuobj.badge[3].active&&bobnotes[num])
+				{
+					draw_sprite(boboverlay,0,32+(note[num][1]*64),((-(cbeat-note[num][0])/mspeed)*room_width)+128)
+				}
+				if(alarm[1]<=0&&menuobj.badge[9].active&&pugnotes[num])
+				{
+					draw_sprite(pugoverlay,0,32+(note[num][1]*64),((-(cbeat-note[num][0])/mspeed)*room_width)+128)
+				}
+				if(arlorow==note[num][1]&&menuobj.badge[11].active)
+				{
+					draw_sprite(arlodinky,0,32+(note[num][1]*64),64)
+				}
+				draw_line(32+((note[num][1])*64),128-(leniencyl*256),32+((note[num][1])*64),128+(leniencye*256))
+			}
 		}
-		if(!note[num][2])
-		{
-			if(note[num][1]<2)
-			{
-				draw_circle(((-(cbeat-note[num][0])/mspeed)*room_width)+128+rowpos[note[num][1]][0],32+(note[num][1]*64)+rowpos[note[num][1]][1],32+(note[num][1]*3),note[num][1])
-			}
-			else if(note[num][1]==3)
-			{
-				draw_sprite(partialcirc,1,((-(cbeat-note[num][0])/mspeed)*room_width)+128+rowpos[note[num][1]][0],(32*note[num][4])+32+(note[num][1]*64)+rowpos[note[num][1]][1])
-			}
-			else
-			{
-				draw_rectangle((((-(cbeat-note[num][0])/mspeed)*room_width)+128-32)+rowpos[note[num][1]][0],(0+(note[num][1]*64))+rowpos[note[num][1]][1],(((-(cbeat-note[num][0])/mspeed)*room_width)+128+32)+rowpos[note[num][1]][0],(64+(note[num][1]*64))+rowpos[note[num][1]][1],true)
-			}
-			if(menuobj.badge[0].active&&ballcapcanhit)
-			{
-				draw_sprite(ballcapoverlay,0,((-(cbeat-note[num][0])/mspeed)*room_width)+128,32+(note[num][1]*64))
-			}
-			if(alarm[1]<=0&&menuobj.badge[8].active&&firenotes[num])
-			{
-				draw_sprite(fireoverlay,0,((-(cbeat-note[num][0])/mspeed)*room_width)+128,32+(note[num][1]*64))
-			}
-			if(alarm[1]<=0&&menuobj.badge[3].active&&bobnotes[num])
-			{
-				draw_sprite(boboverlay,0,((-(cbeat-note[num][0])/mspeed)*room_width)+128,32+(note[num][1]*64))
-			}
-			if(alarm[1]<=0&&menuobj.badge[9].active&&pugnotes[num])
-			{
-				draw_sprite(pugoverlay,0,((-(cbeat-note[num][0])/mspeed)*room_width)+128,32+(note[num][1]*64))
-			}
-			if(arlorow==note[num][1]&&menuobj.badge[11].active)
-			{
-				draw_sprite(arlodinky,0,64,32+(note[num][1]*64))
-			}
-			draw_line(128-(leniencyl*256),32+((note[num][1])*64),128+(leniencye*256),32+((note[num][1])*64))
-			if(-(cbeat-note[num][0])>-leniencyl&&-(cbeat-note[num][0])<leniencye&&!keyshit[note[num][1]])
+	}
+			if(cares&&-(cbeat-note[num][0])>-leniencyl&&-(cbeat-note[num][0])<leniencye&&!keyshit[note[num][1]]&&!note[num][2])
 			{
 				if(note[num][1]<array_length(keyhit)&&keyhit[note[num][1]]||menuobj.auto&&((cbeat-note[num][0])+1)*100>100||menuobj.badge[0].active&&ballcapcanhit&&-(cbeat-note[num][0])<0||doughits>0&&menuobj.badge[4].active)
 				{
@@ -197,8 +276,7 @@ repeat(array_length(note))
 					keyhit[note[num][1]]=false
 				}
 			}
-		}
-	}
+		
 	num+=1
 }
 if(notes>1)

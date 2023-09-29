@@ -5,6 +5,7 @@ randomize()
 alt=false
 offset=0
 song=Sound1
+downscroll=false
 songlist=[["energy island.txt","energy island.ogg",[0,0,0,0]],["uranus.txt","protogen posting - uranus.ogg",[0,0,0,0]],["spirals.txt","spirals.ogg",[0,0,0,0]],["be cool.txt","be cool.ogg",[0,0,0,0]],["weird.txt","weird.ogg",[0,0,0,0]],["polyrights.txt","polyrights.ogg",[0,0,0,0]],["failed experiment.txt","failed experiment.ogg",[0,0,0,0]],["Round5.txt","Round5.ogg",[0,0,0,0]]]
 
 smenu=0
@@ -359,6 +360,10 @@ menunum[5]=[
 		menuobj.shouldsave=false
 		game_end()
 	}},
+	{namey: "upscroll "+string(menuobj.downscroll),func: function(){
+		menuobj.downscroll=!menuobj.downscroll
+		namey= "upscroll "+string(menuobj.downscroll)
+	}},
 	{namey: "reset save data",func: function(){
 		file_delete("save.pt")
 		menuobj.shouldsave=false
@@ -536,7 +541,8 @@ save_story_levels=function(){
 		level: menuobj.level,
 		nxp: menuobj.xptonextlevel,
 		xp: menuobj.xp,
-		latency: menuobj.offset
+		latency: menuobj.offset,
+		downscroll: menuobj.downscroll
 	}
 	save_file(struct,"save.pt")
 }
@@ -553,7 +559,8 @@ save_story_levels_no_songlist=function(){
 		level: menuobj.level,
 		nxp: menuobj.xptonextlevel,
 		xp: menuobj.xp,
-		latency: menuobj.offset
+		latency: menuobj.offset,
+		downscroll: menuobj.downscroll
 	}
 	save_file(struct,"save.pt")
 }
@@ -584,6 +591,10 @@ load_story_levels=function(){
 		if(variable_struct_exists(str,"latency"))
 		{
 			menuobj.offset=str.latency
+		}
+		if(variable_struct_exists(str,"downscroll"))
+		{
+			menuobj.downscroll=str.downscroll
 		}
 		/*var num=0
 		repeat(array_length(str.savedlevels))
