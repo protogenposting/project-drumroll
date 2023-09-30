@@ -66,7 +66,7 @@ repeat(array_length(note))
 {
 	var leniencyl=leniency+((menuobj.badge[8].active&&firenotes[num])*0.1)+((menuobj.badge[9].active&&pugnotes[num])*0.1)
 	var leniencye=leniency+((menuobj.badge[8].active&&firenotes[num])*0.1)+((menuobj.badge[9].active&&pugnotes[num])*0.1)
-	if(-(cbeat-note[num][0])<-leniencyl&&note[num][1]!=3&&!note[num][2]&&arlorow!=note[num][1])
+	if(-(cbeat-note[num][0])<-leniencyl&&(note[num][1]!=3||!menuobj.spdrumroll)&&!note[num][2]&&arlorow!=note[num][1])
 	{
 		fc=false
 		if(!menuobj.badge[3].active||!bobnotes[num])
@@ -102,7 +102,7 @@ repeat(array_length(note))
 					draw_rectangle(((-(cbeat-note[num][0])/mspeed)*room_width)+128-(32*size)+rowpos[note[num][1]][0],(32-(32*size))+128+rowpos[note[num][1]][1],((-(cbeat-note[num][0])/mspeed)*room_width)+128+(32*size)+rowpos[note[num][1]][0],(32+(32*size))+128+rowpos[note[num][1]][1],true)
 				}
 			}
-			if(-(cbeat-note[num][0])<0&&!note[num][3]&&note[num][1]!=3)
+			if(-(cbeat-note[num][0])<0&&!note[num][3]&&note[num][1]!=3||!menuobj.spdrumroll&&-(cbeat-note[num][0])<0&&!note[num][3])
 			{
 				notes+=1
 				note[num][3]=true
@@ -170,7 +170,7 @@ repeat(array_length(note))
 					draw_rectangle((32-(32*size))+128+rowpos[note[num][1]][1],((-(cbeat-note[num][0])/mspeed)*room_width)+128-(32*size)+rowpos[note[num][1]][0],(32+(32*size))+128+rowpos[note[num][1]][1],((-(cbeat-note[num][0])/mspeed)*room_width)+128+(32*size)+rowpos[note[num][1]][0],true)
 				}
 			}
-			if(-(cbeat-note[num][0])<0&&!note[num][3]&&note[num][1]!=3)
+			if(-(cbeat-note[num][0])<0&&!note[num][3]&&note[num][1]!=3||!menuobj.spdrumroll&&-(cbeat-note[num][0])<0&&!note[num][3])
 			{
 				notes+=1
 				note[num][3]=true
@@ -279,7 +279,7 @@ repeat(array_length(note))
 					}
 					rot=choose(22.5,-22.5)
 					size=1.5
-					if(note[num][1]!=3)
+					if(note[num][1]!=3||!menuobj.spdrumroll)
 					{
 						nnum=num+1
 						hit=true
@@ -402,3 +402,10 @@ repeat(array_length(menuobj.rollbind))
 	num+=1
 }
 draw_set_halign(fa_left)
+if(!menuobj.drumsounds)
+{
+	audio_stop_sound(hit1)
+	audio_stop_sound(hit2)
+	audio_stop_sound(hit3)
+	audio_stop_sound(hit4)
+}
