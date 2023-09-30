@@ -184,7 +184,7 @@ function refresh_songlist(){
 	show_debug_message(songlist)
 }
 menunum[0]=[
-	{namey: "main levels",func: function(){
+	{namey: "levels",func: function(){
 		menuobj.menuseleted=1
 		menuobj.refresh_songlist()
 	}},
@@ -367,7 +367,7 @@ menunum[5]=[
 	}},
 	{namey: "arrows "+string(menuobj.arrows),func: function(){
 		menuobj.arrows=!menuobj.arrows
-		namey= "upscroll "+string(menuobj.arrows)
+		namey= "arrows "+string(menuobj.arrows)
 	}},
 	{namey: "reset save data",func: function(){
 		file_delete("save.pt")
@@ -547,7 +547,8 @@ save_story_levels=function(){
 		nxp: menuobj.xptonextlevel,
 		xp: menuobj.xp,
 		latency: menuobj.offset,
-		downscroll: menuobj.downscroll
+		downscroll: menuobj.downscroll,
+		arrows: menuobj.arrows
 	}
 	save_file(struct,"save.pt")
 }
@@ -565,7 +566,8 @@ save_story_levels_no_songlist=function(){
 		nxp: menuobj.xptonextlevel,
 		xp: menuobj.xp,
 		latency: menuobj.offset,
-		downscroll: menuobj.downscroll
+		downscroll: menuobj.downscroll,
+		arrows: menuobj.arrows
 	}
 	save_file(struct,"save.pt")
 }
@@ -600,6 +602,10 @@ load_story_levels=function(){
 		if(variable_struct_exists(str,"downscroll"))
 		{
 			menuobj.downscroll=str.downscroll
+		}
+		if(variable_struct_exists(str,"arrows"))
+		{
+			menuobj.arrows=str.arrows
 		}
 		/*var num=0
 		repeat(array_length(str.savedlevels))

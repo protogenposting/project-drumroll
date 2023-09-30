@@ -19,6 +19,7 @@ if(countdown<=0&&doughits<=0)
 	draw_set_font(Font1)
 	draw_text(room_width/2,(room_height/2) + 128,string(acc)+"%")
 	draw_text((room_width/2)-512,(room_height/2) + 256,"misses "+string(misses))
+	draw_text((room_width/2)-512,(room_height/2) + 256+64,"ghost misses "+string(ghostmisses))
 	if(size>1)
 	{
 		size-=0.1
@@ -50,6 +51,7 @@ else if(doughits>0)
 	draw_set_font(Font1)
 	draw_text(room_width/2,(room_height/2) + 128,string(acc)+"%")
 	draw_text((room_width/2)-512,(room_height/2) + 256,"misses "+string(misses))
+	draw_text((room_width/2)-512,(room_height/2) + 256+64,"ghost misses "+string(ghostmisses))
 	if(size>1)
 	{
 		size-=0.1

@@ -3,18 +3,44 @@
 var ballcaphit=false
 if(!menuobj.downscroll)
 {
-	draw_circle(128+rowpos[0][0],32+rowpos[0][1],32,true)
-	draw_circle(128+rowpos[1][0],32+64+rowpos[1][1],32,true)
-	draw_rectangle(128-32+rowpos[2][0],128+32+rowpos[2][1]-32,128+32+rowpos[2][0],128+32+rowpos[2][1]+32,true)
-	draw_rectangle(128-32+rowpos[2][0],128+64+rowpos[2][1],128+32+rowpos[2][0],128+128+rowpos[2][1],true)
+	if(menuobj.arrows)
+	{
+		var ecs=128+rowpos[0][0]
+		var why=32+rowpos[0][1]
+		for(var iyy=0;iyy<=3;iyy++)
+		{
+			draw_sprite(arrowsprs,iyy,ecs,why)
+			why+=64
+		}
+	}
+	else
+	{
+		draw_circle(128+rowpos[0][0],32+rowpos[0][1],32,true)
+		draw_circle(128+rowpos[1][0],32+64+rowpos[1][1],32,true)
+		draw_rectangle(128-32+rowpos[2][0],128+32+rowpos[2][1]-32,128+32+rowpos[2][0],128+32+rowpos[2][1]+32,true)
+		draw_rectangle(128-32+rowpos[2][0],128+64+rowpos[2][1],128+32+rowpos[2][0],128+128+rowpos[2][1],true)
+	}
 	draw_text(256,32,am)
 }
 else
 {
-	draw_circle(32+rowpos[0][1],128+rowpos[0][0],32,true)
-	draw_circle(32+64+rowpos[1][1],128+rowpos[1][0],32,true)
-	draw_rectangle(128+32+rowpos[2][1]-32,128-32+rowpos[2][0],128+32+rowpos[2][1]+32,128+32+rowpos[2][0],true)
-	draw_rectangle(128+64+rowpos[2][1],128-32+rowpos[2][0],128+128+rowpos[2][1],128+32+rowpos[2][0],true)
+	if(menuobj.arrows)
+	{
+		var ecs=32+rowpos[0][1]
+		var why=128+rowpos[0][0]
+		for(var iyy=0;iyy<=3;iyy++)
+		{
+			draw_sprite(arrowsprs,iyy,ecs,why)
+			ecs+=64
+		}
+	}
+	else
+	{
+		draw_circle(32+rowpos[0][1],128+rowpos[0][0],32,true)
+		draw_circle(32+64+rowpos[1][1],128+rowpos[1][0],32,true)
+		draw_rectangle(128+32+rowpos[2][1]-32,128-32+rowpos[2][0],128+32+rowpos[2][1]+32,128+32+rowpos[2][0],true)
+		draw_rectangle(128+64+rowpos[2][1],128-32+rowpos[2][0],128+128+rowpos[2][1],128+32+rowpos[2][0],true)
+	}
 	draw_text(256,32,am)
 }
 var num=0
@@ -64,7 +90,7 @@ repeat(array_length(note))
 		if((((-(cbeat-note[num][0])/mspeed)*room_width)+128)<room_width&&(((-(cbeat-note[num][0])/mspeed)*room_width)+128)>0)
 		{
 			cares=true
-			if(note[num][2])
+			if(note[num][2]&&!menuobj.arrows)
 			{
 				var size=(((-(cbeat-note[num][0])/mspeed)*room_width)+128)/128
 				if(note[num][1]<2)
@@ -84,17 +110,24 @@ repeat(array_length(note))
 			}
 			if(!note[num][2])
 			{
-				if(note[num][1]<2)
+				if(menuobj.arrows)
 				{
-					draw_circle(((-(cbeat-note[num][0])/mspeed)*room_width)+128+rowpos[note[num][1]][0],32+(note[num][1]*64)+rowpos[note[num][1]][1],32+(note[num][1]*3),note[num][1])
-				}
-				else if(note[num][1]==3)
-				{
-					draw_sprite(partialcirc,1,((-(cbeat-note[num][0])/mspeed)*room_width)+128+rowpos[note[num][1]][0],(32*note[num][4])+32+(note[num][1]*64)+rowpos[note[num][1]][1])
+					draw_sprite(arrowsprs,note[num][1],((-(cbeat-note[num][0])/mspeed)*room_width)+128+rowpos[note[num][1]][0],(note[num][1]*64)+rowpos[note[num][1]][1])
 				}
 				else
 				{
-					draw_rectangle((((-(cbeat-note[num][0])/mspeed)*room_width)+128-32)+rowpos[note[num][1]][0],(0+(note[num][1]*64))+rowpos[note[num][1]][1],(((-(cbeat-note[num][0])/mspeed)*room_width)+128+32)+rowpos[note[num][1]][0],(64+(note[num][1]*64))+rowpos[note[num][1]][1],true)
+					if(note[num][1]<2)
+					{
+						draw_circle(((-(cbeat-note[num][0])/mspeed)*room_width)+128+rowpos[note[num][1]][0],32+(note[num][1]*64)+rowpos[note[num][1]][1],32+(note[num][1]*3),note[num][1])
+					}
+					else if(note[num][1]==3)
+					{
+						draw_sprite(partialcirc,1,((-(cbeat-note[num][0])/mspeed)*room_width)+128+rowpos[note[num][1]][0],(32*note[num][4])+32+(note[num][1]*64)+rowpos[note[num][1]][1])
+					}
+					else
+					{
+						draw_rectangle((((-(cbeat-note[num][0])/mspeed)*room_width)+128-32)+rowpos[note[num][1]][0],(0+(note[num][1]*64))+rowpos[note[num][1]][1],(((-(cbeat-note[num][0])/mspeed)*room_width)+128+32)+rowpos[note[num][1]][0],(64+(note[num][1]*64))+rowpos[note[num][1]][1],true)
+					}
 				}
 				if(menuobj.badge[0].active&&ballcapcanhit)
 				{
@@ -125,7 +158,7 @@ repeat(array_length(note))
 		if((((-(cbeat-note[num][0])/mspeed)*room_height)+128)<room_height&&(((-(cbeat-note[num][0])/mspeed)*room_height)+128)>0)
 		{
 			cares=true
-			if(note[num][2])
+			if(note[num][2]&&!menuobj.arrows)
 			{
 				var size=(((-(cbeat-note[num][0])/mspeed)*room_height)+128)/128
 				if(note[num][1]<2)
@@ -145,17 +178,24 @@ repeat(array_length(note))
 			}
 			if(!note[num][2])
 			{
-				if(note[num][1]<2)
+				if(menuobj.arrows)
 				{
-					draw_circle(32+(note[num][1]*64)+rowpos[note[num][1]][1],((-(cbeat-note[num][0])/mspeed)*room_width)+128+rowpos[note[num][1]][0],32+(note[num][1]*3),note[num][1])
-				}
-				else if(note[num][1]==3)
-				{
-					draw_sprite(partialcirc,1,(32*note[num][4])+32+(note[num][1]*64)+rowpos[note[num][1]][1],((-(cbeat-note[num][0])/mspeed)*room_width)+128+rowpos[note[num][1]][0])
+					draw_sprite(arrowsprs,note[num][1],32+(note[num][1]*64)+rowpos[note[num][1]][1],((-(cbeat-note[num][0])/mspeed)*room_width)+128+rowpos[note[num][1]][0])
 				}
 				else
 				{
-					draw_rectangle((0+(note[num][1]*64))+rowpos[note[num][1]][1],(((-(cbeat-note[num][0])/mspeed)*room_width)+128-32)+rowpos[note[num][1]][0],(64+(note[num][1]*64))+rowpos[note[num][1]][1],(((-(cbeat-note[num][0])/mspeed)*room_width)+128+32)+rowpos[note[num][1]][0],true)
+					if(note[num][1]<2)
+					{
+						draw_circle(32+(note[num][1]*64)+rowpos[note[num][1]][1],((-(cbeat-note[num][0])/mspeed)*room_width)+128+rowpos[note[num][1]][0],32+(note[num][1]*3),note[num][1])
+					}
+					else if(note[num][1]==3)
+					{
+						draw_sprite(partialcirc,1,(32*note[num][4])+32+(note[num][1]*64)+rowpos[note[num][1]][1],((-(cbeat-note[num][0])/mspeed)*room_width)+128+rowpos[note[num][1]][0])
+					}
+					else
+					{
+						draw_rectangle((0+(note[num][1]*64))+rowpos[note[num][1]][1],(((-(cbeat-note[num][0])/mspeed)*room_width)+128-32)+rowpos[note[num][1]][0],(64+(note[num][1]*64))+rowpos[note[num][1]][1],(((-(cbeat-note[num][0])/mspeed)*room_width)+128+32)+rowpos[note[num][1]][0],true)
+					}
 				}
 				if(menuobj.badge[0].active&&ballcapcanhit)
 				{
@@ -205,25 +245,37 @@ repeat(array_length(note))
 						zoom=5
 					}
 					array_push(accuracy,((cbeat-note[num][0])+1)*100)
-					if(((cbeat-note[num][0])+1)*100<80)
+					if(((cbeat-note[num][0])+1)*100<50)
 					{
 						rating="offbeat..."
 					}
-					if(((cbeat-note[num][0])+1)*100>80)
+					if(((cbeat-note[num][0])+1)*100>50)
 					{
-						rating="ok..."
+						rating="decent..."
 					}
-					if(((cbeat-note[num][0])+1)*100>90)
+					if(((cbeat-note[num][0])+1)*100>80)
 					{
 						rating="good-"
 					}
-					if(((cbeat-note[num][0])+1)*100>95)
+					if(((cbeat-note[num][0])+1)*100>90)
 					{
 						rating="superb!"
 					}
 					if(((cbeat-note[num][0])+1)*100>=100)
 					{
 						rating="amazing!"
+					}
+					if(((cbeat-note[num][0])+1)*100>=90&&menuobj.arrows)
+					{
+						var p=part_system_create(arrowhit)
+						if(menuobj.downscroll)
+						{
+							part_system_position(p,32+(note[num][1]*64)+rowpos[note[num][1]][1],((-(cbeat-note[num][0])/mspeed)*room_width)+128+rowpos[note[num][1]][0])
+						}
+						else
+						{
+							part_system_position(p,((-(cbeat-note[num][0])/mspeed)*room_width)+128+rowpos[note[num][1]][0],(note[num][1]*64)+rowpos[note[num][1]][1])
+						}
 					}
 					rot=choose(22.5,-22.5)
 					size=1.5
@@ -294,8 +346,8 @@ repeat(array_length(keyhit))
 	}
 	if(keyhit[num]&&!hit&&!ballcaphit)
 	{
-		misses+=1
-		rating="miss..."
+		ghostmisses+=1
+		rating="ghost miss..."
 		break;
 	}
 	num+=1

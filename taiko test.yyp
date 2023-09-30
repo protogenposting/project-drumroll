@@ -60,6 +60,7 @@
   "resources": [
     {"id":{"name":"badge14","path":"sprites/badge14/badge14.yy",},},
     {"id":{"name":"bobmiss","path":"sounds/bobmiss/bobmiss.yy",},},
+    {"id":{"name":"arrowhit","path":"particles/arrowhit/arrowhit.yy",},},
     {"id":{"name":"badge2","path":"sprites/badge2/badge2.yy",},},
     {"id":{"name":"snarekeyicon","path":"sprites/snarekeyicon/snarekeyicon.yy",},},
     {"id":{"name":"hitrimleft1","path":"sprites/hitrimleft1/hitrimleft1.yy",},},

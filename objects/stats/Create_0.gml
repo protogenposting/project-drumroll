@@ -12,6 +12,7 @@ function remap(value, left1, right1, left2, right2) {
 }
 am=""
 misses=0
+ghostmisses=0
 rating=""
 rot=0
 size=1

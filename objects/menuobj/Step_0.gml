@@ -1,5 +1,26 @@
 /// @description Insert description here
 // You can write your code in this editor
+keyhit=[keyboard_check_pressed(menuobj.bassbind[0])||keyboard_check_pressed(menuobj.bassbind[1])||keyboard_check_pressed(menuobj.bassbind[2]),keyboard_check_pressed(menuobj.snarebind[0])||keyboard_check_pressed(menuobj.snarebind[1])||keyboard_check_pressed(menuobj.snarebind[2]),keyboard_check_pressed(menuobj.cymbalbind),keyboard_check_pressed(menuobj.rollbind[0])||keyboard_check_pressed(menuobj.rollbind[1])]
+if(keyhit[0])
+{
+	audio_play_sound(hit1,1000,false)
+	sprite_index=choose(hitdrumright1,hitdrumleft1)
+}
+if(keyhit[1])
+{
+	audio_play_sound(hit2,1000,false)
+	sprite_index=choose(hitsnareright1,hitsnareleft1)
+}
+if(keyhit[2])
+{
+	audio_play_sound(hit3,1000,false)
+	sprite_index=choose(hitrimright1,hitrimleft1)
+}
+if(keyhit[3])
+{
+	audio_play_sound(hit4,1000,false)
+	sprite_index=choose(hitdrumright1,hitdrumleft1)
+}
 var playerdeviceconnected=0
 if(gamepad_is_connected(4))
 {
