@@ -39,5 +39,30 @@ if(cbpm!=0&&room!=Room1)
 			alt=0
 		}
 	}
+	keyhit=[keyboard_check_pressed(menuobj.bassbind[0])||keyboard_check_pressed(menuobj.bassbind[1])||keyboard_check_pressed(menuobj.bassbind[2]),keyboard_check_pressed(menuobj.snarebind[0])||keyboard_check_pressed(menuobj.snarebind[1])||keyboard_check_pressed(menuobj.snarebind[2]),keyboard_check_pressed(menuobj.cymbalbind),keyboard_check_pressed(menuobj.rollbind[0])||keyboard_check_pressed(menuobj.rollbind[1])]
+	if(keyhit[0])
+	{
+		audio_play_sound(hit1,1000,false)
+		sprite_index=choose(hitdrumright1,hitdrumleft1)
+		image_index=0
+	}
+	if(keyhit[1])
+	{
+		audio_play_sound(hit2,1000,false)
+		sprite_index=choose(hitsnareright1,hitsnareleft1)
+		image_index=0
+	}
+	if(keyhit[2])
+	{
+		audio_play_sound(hit3,1000,false)
+		sprite_index=choose(hitrimright1,hitrimleft1)
+		image_index=0
+	}
+	if(keyhit[3])
+	{
+		audio_play_sound(hit4,1000,false)
+		sprite_index=choose(hitdrumright1,hitdrumleft1)
+		image_index=0
+	}
 	draw_sprite(sprite_index,image_index,room_width/2,room_height/2)
 }
