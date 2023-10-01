@@ -3,13 +3,13 @@
 var ballcaphit=false
 if(!menuobj.downscroll)
 {
-	if(menuobj.arrows)
+	if(menuobj.arrows>=1)
 	{
 		var ecs=128+rowpos[0][0]
 		var why=32+rowpos[0][1]
 		for(var iyy=0;iyy<=3;iyy++)
 		{
-			draw_sprite(arrowsprs,iyy,ecs,why)
+			draw_sprite(menuobj.notestyles[menuobj.arrows],iyy,ecs,why)
 			why+=64
 		}
 	}
@@ -24,13 +24,13 @@ if(!menuobj.downscroll)
 }
 else
 {
-	if(menuobj.arrows)
+	if(menuobj.arrows>=1)
 	{
 		var ecs=32+rowpos[0][1]
 		var why=128+rowpos[0][0]
 		for(var iyy=0;iyy<=3;iyy++)
 		{
-			draw_sprite(arrowsprs,iyy,ecs,why)
+			draw_sprite(menuobj.notestyles[menuobj.arrows],iyy,ecs,why)
 			ecs+=64
 		}
 	}
@@ -90,7 +90,7 @@ repeat(array_length(note))
 		if((((-(cbeat-note[num][0])/mspeed)*room_width)+128)<room_width&&(((-(cbeat-note[num][0])/mspeed)*room_width)+128)>0)
 		{
 			cares=true
-			if(note[num][2]&&!menuobj.arrows)
+			if(note[num][2]&&menuobj.arrows==0)
 			{
 				var size=(((-(cbeat-note[num][0])/mspeed)*room_width)+128)/128
 				if(note[num][1]<2)
@@ -110,9 +110,9 @@ repeat(array_length(note))
 			}
 			if(!note[num][2])
 			{
-				if(menuobj.arrows)
+				if(menuobj.arrows>=1)
 				{
-					draw_sprite(arrowsprs,note[num][1],((-(cbeat-note[num][0])/mspeed)*room_width)+128+rowpos[note[num][1]][0],(note[num][1]*64)+rowpos[note[num][1]][1])
+					draw_sprite(menuobj.notestyles[menuobj.arrows],note[num][1],((-(cbeat-note[num][0])/mspeed)*room_width)+128+rowpos[note[num][1]][0],(note[num][1]*64)+rowpos[note[num][1]][1])
 				}
 				else
 				{
@@ -158,7 +158,7 @@ repeat(array_length(note))
 		if((((-(cbeat-note[num][0])/mspeed)*room_height)+128)<room_height&&(((-(cbeat-note[num][0])/mspeed)*room_height)+128)>0)
 		{
 			cares=true
-			if(note[num][2]&&!menuobj.arrows)
+			if(note[num][2]&&menuobj.arrows==0)
 			{
 				var size=(((-(cbeat-note[num][0])/mspeed)*room_height)+128)/128
 				if(note[num][1]<2)
@@ -178,9 +178,9 @@ repeat(array_length(note))
 			}
 			if(!note[num][2])
 			{
-				if(menuobj.arrows)
+				if(menuobj.arrows>=1)
 				{
-					draw_sprite(arrowsprs,note[num][1],32+(note[num][1]*64)+rowpos[note[num][1]][1],((-(cbeat-note[num][0])/mspeed)*room_width)+128+rowpos[note[num][1]][0])
+					draw_sprite(menuobj.notestyles[menuobj.arrows],note[num][1],32+(note[num][1]*64)+rowpos[note[num][1]][1],((-(cbeat-note[num][0])/mspeed)*room_width)+128+rowpos[note[num][1]][0])
 				}
 				else
 				{
@@ -221,9 +221,10 @@ repeat(array_length(note))
 			}
 		}
 	}
+			var scorefromhit=100-(100*abs(note[num][0]-cbeat))
 			if(cares&&-(cbeat-note[num][0])>-leniencyl&&-(cbeat-note[num][0])<leniencye&&!keyshit[note[num][1]]&&!note[num][2])
 			{
-				if(note[num][1]<array_length(keyhit)&&keyhit[note[num][1]]||menuobj.auto&&((cbeat-note[num][0])+1)*100>100||menuobj.badge[0].active&&ballcapcanhit&&-(cbeat-note[num][0])<0||doughits>0&&menuobj.badge[4].active)
+				if(note[num][1]<array_length(keyhit)&&keyhit[note[num][1]]||menuobj.auto&&scorefromhit>95||menuobj.badge[0].active&&ballcapcanhit&&-(cbeat-note[num][0])<0||doughits>0&&menuobj.badge[4].active)
 				{
 					keyshit[note[num][1]]=1
 					doughits-=1
@@ -244,28 +245,28 @@ repeat(array_length(note))
 					{
 						zoom=5
 					}
-					array_push(accuracy,((cbeat-note[num][0])+1)*100)
-					if(((cbeat-note[num][0])+1)*100<50)
+					array_push(accuracy,scorefromhit)
+					if(scorefromhit<50)
 					{
 						rating="offbeat..."
 					}
-					if(((cbeat-note[num][0])+1)*100>50)
+					if(scorefromhit>50)
 					{
 						rating="decent..."
 					}
-					if(((cbeat-note[num][0])+1)*100>80)
+					if(scorefromhit>80)
 					{
 						rating="good-"
 					}
-					if(((cbeat-note[num][0])+1)*100>90)
+					if(scorefromhit>90)
 					{
 						rating="superb!"
 					}
-					if(((cbeat-note[num][0])+1)*100>=100)
+					if(scorefromhit>=95)
 					{
 						rating="amazing!"
 					}
-					if(((cbeat-note[num][0])+1)*100>=90&&menuobj.arrows)
+					if(scorefromhit>=90&&menuobj.arrows)
 					{
 						var p=part_system_create(arrowhit)
 						if(menuobj.downscroll)
@@ -290,26 +291,26 @@ repeat(array_length(note))
 						hit=true
 						audio_play_sound(asset_get_index("hit"+string(note[num][1]+1)),1000,false)
 					}
-					scorey+=((cbeat-note[num][0])+1)*100
+					scorey+=scorefromhit
 					if(menuobj.badge[6].active)
 					{
-						scorey+=((cbeat-note[num][0])+1)*100
+						scorey+=scorefromhit
 					}
 					if(menuobj.badge[9].active&&pugnotes[num])
 					{
-						scorey+=((cbeat-note[num][0])+1)*300
+						scorey+=(abs(cbeat-note[num][0]))*300
 					}
 					if(menuobj.badge[10].active)
 					{
-						scorey+=((cbeat-note[num][0])+1)*400
+						scorey+=(abs(cbeat-note[num][0]))*400
 					}
 					if(menuobj.badge[14].active)
 					{
-						scorey+=((cbeat-note[num][0])+1)*900
+						scorey+=(abs(cbeat-note[num][0]))*900
 					}
 					if(menuobj.badge[15].active)
 					{
-						scorey+=((cbeat-note[num][0])+1)*(combo)
+						scorey+=(abs(cbeat-note[num][0]))*(combo)
 					}
 					am=string(-(oldscore-scorey))
 					if(doughits<=0)

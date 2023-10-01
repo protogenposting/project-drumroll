@@ -9,6 +9,8 @@ downscroll=false
 arrows=false
 spdrumroll=true
 drumsounds=true
+notestyles=[0,arrowsprs,barsprs,drumscolored,arrowsprscolored,barsprscolored]
+notestylenames=["classic drums","arrows","bars","colored drums","colored arrows","colored bars"]
 songlist=[["energy island.txt","energy island.ogg",[0,0,0,0]],["uranus.txt","protogen posting - uranus.ogg",[0,0,0,0]],["spirals.txt","spirals.ogg",[0,0,0,0]],["be cool.txt","be cool.ogg",[0,0,0,0]],["weird.txt","weird.ogg",[0,0,0,0]],["polyrights.txt","polyrights.ogg",[0,0,0,0]],["failed experiment.txt","failed experiment.ogg",[0,0,0,0]],["Round5.txt","Round5.ogg",[0,0,0,0]]]
 
 smenu=0
@@ -350,41 +352,7 @@ menunum[4]=[
 		menuobj.menuseleted=0
 	}},
 ]
-menunum[5]=[
-	{namey: "back",func: function(){
-		menuobj.menuseleted=0
-	}},
-	{namey: "detect offset",func: function(){
-		menuobj.offsetaverage=[]
-		menuobj.menuseleted=6
-	}},
-	{namey: "reset song list",func: function(){
-		menuobj.save_story_levels_no_songlist()
-		menuobj.shouldsave=false
-		game_end()
-	}},
-	{namey: "upscroll "+string(menuobj.downscroll),func: function(){
-		menuobj.downscroll=!menuobj.downscroll
-		namey= "upscroll "+string(menuobj.downscroll)
-	}},
-	{namey: "arrows "+string(menuobj.arrows),func: function(){
-		menuobj.arrows=!menuobj.arrows
-		namey= "arrows "+string(menuobj.arrows)
-	}},
-	{namey: "special drumroll notes "+string(menuobj.spdrumroll),func: function(){
-		menuobj.spdrumroll=!menuobj.spdrumroll
-		namey= "special drumroll notes "+string(menuobj.spdrumroll)
-	}},
-	{namey: "drum sounds "+string(menuobj.drumsounds),func: function(){
-		menuobj.drumsounds=!menuobj.drumsounds
-		namey= "drum sounds "+string(menuobj.drumsounds)
-	}},
-	{namey: "reset save data",func: function(){
-		file_delete("save.pt")
-		menuobj.shouldsave=false
-		game_end()
-	}},
-]
+
 menunum[6]=[
 	{namey: "back",func: function(){
 		var num=0
@@ -579,7 +547,9 @@ save_story_levels_no_songlist=function(){
 		xp: menuobj.xp,
 		latency: menuobj.offset,
 		downscroll: menuobj.downscroll,
-		arrows: menuobj.arrows
+		arrows: menuobj.arrows,
+		drumsounds: menuobj.drumsounds,
+		spdrumroll: menuobj.spdrumroll
 	}
 	save_file(struct,"save.pt")
 }

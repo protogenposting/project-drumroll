@@ -46,3 +46,42 @@ menunum[3]=[
 	}},
 ]
 menutheme=audio_create_stream(songlist[irandom(array_length(songlist)-1)][1])
+menunum[5]=[
+	{namey: "back",func: function(){
+		menuobj.menuseleted=0
+	}},
+	{namey: "detect offset",func: function(){
+		menuobj.offsetaverage=[]
+		menuobj.menuseleted=6
+	}},
+	{namey: "reset song list",func: function(){
+		menuobj.save_story_levels_no_songlist()
+		menuobj.shouldsave=false
+		game_end()
+	}},
+	{namey: "upscroll "+string(menuobj.downscroll),func: function(){
+		menuobj.downscroll=!menuobj.downscroll
+		namey= "upscroll "+string(menuobj.downscroll)
+	}},
+	{namey: "note style: "+menuobj.notestylenames[menuobj.arrows],func: function(){
+		menuobj.arrows+=1
+		if(menuobj.arrows>=array_length(menuobj.notestyles))
+		{
+			menuobj.arrows=0
+		}
+		namey= "note style: "+menuobj.notestylenames[menuobj.arrows]
+	}},
+	{namey: "special drumroll notes "+string(menuobj.spdrumroll),func: function(){
+		menuobj.spdrumroll=!menuobj.spdrumroll
+		namey= "special drumroll notes "+string(menuobj.spdrumroll)
+	}},
+	{namey: "drum sounds "+string(menuobj.drumsounds),func: function(){
+		menuobj.drumsounds=!menuobj.drumsounds
+		namey= "drum sounds "+string(menuobj.drumsounds)
+	}},
+	{namey: "reset save data",func: function(){
+		file_delete("save.pt")
+		menuobj.shouldsave=false
+		game_end()
+	}},
+]
