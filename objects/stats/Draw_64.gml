@@ -291,6 +291,10 @@ repeat(array_length(note))
 						hit=true
 						audio_play_sound(asset_get_index("hit"+string(note[num][1]+1)),1000,false)
 					}
+					if(menuobj.badge[15].active)
+					{
+						scorefromhit*=combo/20
+					}
 					scorey+=scorefromhit
 					if(menuobj.badge[6].active)
 					{
@@ -307,10 +311,6 @@ repeat(array_length(note))
 					if(menuobj.badge[14].active)
 					{
 						scorey+=(abs(cbeat-note[num][0]))*900
-					}
-					if(menuobj.badge[15].active)
-					{
-						scorey+=(abs(cbeat-note[num][0]))*(combo)
 					}
 					am=string(-(oldscore-scorey))
 					if(doughits<=0)
