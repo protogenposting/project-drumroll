@@ -138,6 +138,12 @@ badge[17]={
 	sprite: badge17,
 	desc: "shifts all notes up 1 beat"
 }
+badge[18]={
+	active: false,
+	level: 35,
+	sprite: badge19,
+	desc: "turns downscroll on and off every beat"
+}
 xp=0
 
 level=1

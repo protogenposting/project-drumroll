@@ -9,7 +9,7 @@ if(!menuobj.downscroll)
 		var why=32+rowpos[0][1]
 		for(var iyy=0;iyy<=3;iyy++)
 		{
-			draw_sprite(menuobj.notestyles[menuobj.arrows],iyy,ecs,why)
+			draw_sprite_ext(menuobj.notestyles[menuobj.arrows],iyy,ecs,why,1+keyhithold[iyy]*0.1,1+keyhithold[iyy]*0.1,0,c_white,1)
 			why+=64
 		}
 	}
@@ -30,7 +30,7 @@ else
 		var why=128+rowpos[0][0]
 		for(var iyy=0;iyy<=3;iyy++)
 		{
-			draw_sprite(menuobj.notestyles[menuobj.arrows],iyy,ecs,why)
+			draw_sprite_ext(menuobj.notestyles[menuobj.arrows],iyy,ecs,why,1+keyhithold[iyy]*0.1,1+keyhithold[iyy]*0.1,0,c_white,1)
 			ecs+=64
 		}
 	}
@@ -112,7 +112,7 @@ repeat(array_length(note))
 			{
 				if(menuobj.arrows>=1)
 				{
-					draw_sprite(menuobj.notestyles[menuobj.arrows],note[num][1],((-(cbeat-note[num][0])/mspeed)*room_width)+128+rowpos[note[num][1]][0],(note[num][1]*64)+rowpos[note[num][1]][1])
+					draw_sprite(menuobj.notestyles[menuobj.arrows],note[num][1],((-(cbeat-note[num][0])/mspeed)*room_width)+128+rowpos[note[num][1]][0],(note[num][1]*64)+rowpos[note[num][1]][1]+32)
 				}
 				else
 				{
@@ -224,7 +224,7 @@ repeat(array_length(note))
 			var scorefromhit=105-(100*abs(note[num][0]-cbeat))
 			if(cares&&-(cbeat-note[num][0])>-leniencyl&&-(cbeat-note[num][0])<leniencye&&!keyshit[note[num][1]]&&!note[num][2])
 			{
-				if(note[num][1]<array_length(keyhit)&&keyhit[note[num][1]]||menuobj.auto&&scorefromhit>=100||menuobj.badge[0].active&&ballcapcanhit&&-(cbeat-note[num][0])<0||doughits>0&&menuobj.badge[4].active)
+				if(note[num][1]<array_length(keyhit)&&keyhit[note[num][1]]||audio_sound_get_pitch(aud)>1&&menuobj.auto&&scorefromhit>=80||menuobj.auto&&scorefromhit>=100||menuobj.badge[0].active&&ballcapcanhit&&-(cbeat-note[num][0])<0||doughits>0&&menuobj.badge[4].active)
 				{
 					keyshit[note[num][1]]=1
 					doughits-=1
