@@ -221,10 +221,10 @@ repeat(array_length(note))
 			}
 		}
 	}
-			var scorefromhit=100-(100*abs(note[num][0]-cbeat))
+			var scorefromhit=105-(100*abs(note[num][0]-cbeat))
 			if(cares&&-(cbeat-note[num][0])>-leniencyl&&-(cbeat-note[num][0])<leniencye&&!keyshit[note[num][1]]&&!note[num][2])
 			{
-				if(note[num][1]<array_length(keyhit)&&keyhit[note[num][1]]||menuobj.auto&&scorefromhit>95||menuobj.badge[0].active&&ballcapcanhit&&-(cbeat-note[num][0])<0||doughits>0&&menuobj.badge[4].active)
+				if(note[num][1]<array_length(keyhit)&&keyhit[note[num][1]]||menuobj.auto&&scorefromhit>=100||menuobj.badge[0].active&&ballcapcanhit&&-(cbeat-note[num][0])<0||doughits>0&&menuobj.badge[4].active)
 				{
 					keyshit[note[num][1]]=1
 					doughits-=1

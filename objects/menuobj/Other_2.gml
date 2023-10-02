@@ -50,7 +50,10 @@ menunum[5]=[
 	{namey: "back",func: function(){
 		menuobj.menuseleted=0
 	}},
-	{namey: "detect offset",func: function(){
+	{namey: "fullscreen",func: function(){
+		window_set_fullscreen(!window_get_fullscreen())
+	}},
+	{namey: "detect offset DO NOT USE YET",func: function(){
 		menuobj.offsetaverage=[]
 		menuobj.menuseleted=6
 	}},
