@@ -9,7 +9,7 @@ if(!menuobj.downscroll)
 		var why=32+rowpos[0][1]
 		for(var iyy=0;iyy<=3;iyy++)
 		{
-			draw_sprite_ext(menuobj.notestyles[menuobj.arrows],iyy,ecs,why,1+keyhithold[iyy]*0.1,1+keyhithold[iyy]*0.1,0,c_white,1)
+			draw_sprite_ext(menuobj.notestyles[menuobj.arrows],iyy,ecs,why,1+keyhithold[iyy]*0.1,1+keyhithold[iyy]*0.1,-90,c_white,1)
 			why+=64
 		}
 	}
@@ -112,7 +112,7 @@ repeat(array_length(note))
 			{
 				if(menuobj.arrows>=1)
 				{
-					draw_sprite(menuobj.notestyles[menuobj.arrows],note[num][1],((-(cbeat-note[num][0])/mspeed)*room_width)+128+rowpos[note[num][1]][0],(note[num][1]*64)+rowpos[note[num][1]][1]+32)
+					draw_sprite_ext(menuobj.notestyles[menuobj.arrows],note[num][1],((-(cbeat-note[num][0])/mspeed)*room_width)+128+rowpos[note[num][1]][0],(note[num][1]*64)+rowpos[note[num][1]][1]+32,1,1,-90,c_white,1)
 				}
 				else
 				{
