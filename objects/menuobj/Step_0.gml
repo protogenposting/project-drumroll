@@ -1,5 +1,15 @@
 /// @description Insert description here
 // You can write your code in this editor
+if(window_get_fullscreen())
+{
+	view_set_wport(view_current,1920)
+	view_set_hport(view_current,1080)
+}
+else
+{
+	view_set_wport(view_current,1366)
+	view_set_hport(view_current,768)
+}
 var playerdeviceconnected=0
 if(gamepad_is_connected(4))
 {
