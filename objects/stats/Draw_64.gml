@@ -9,6 +9,10 @@ if(!menuobj.downscroll)
 		var why=32+rowpos[0][1]
 		for(var iyy=0;iyy<=3;iyy++)
 		{
+			if(point_in_rectangle(device_mouse_x_to_gui(0),device_mouse_y_to_gui(0),ecs-32,why-32,ecs+32,why+32)&&mouse_check_button(mb_left))
+			{
+				keyhit[iyy]=true
+			}
 			draw_sprite_ext(menuobj.notestyles[menuobj.arrows],iyy,ecs,why,1+keyhithold[iyy]*0.1,1+keyhithold[iyy]*0.1,-90,c_white,1)
 			why+=64
 		}
@@ -30,6 +34,10 @@ else
 		var why=128+rowpos[0][0]
 		for(var iyy=0;iyy<=3;iyy++)
 		{
+			if(point_in_rectangle(device_mouse_x_to_gui(0),device_mouse_y_to_gui(0),ecs-32,why-32,ecs+32,why+32)&&mouse_check_button(mb_left))
+			{
+				keyhit[iyy]=true
+			}
 			draw_sprite_ext(menuobj.notestyles[menuobj.arrows],iyy,ecs,why,1+keyhithold[iyy]*0.1,1+keyhithold[iyy]*0.1,0,c_white,1)
 			ecs+=64
 		}
