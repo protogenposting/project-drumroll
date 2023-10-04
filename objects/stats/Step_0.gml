@@ -150,7 +150,7 @@ if(countdown<=0)
 	}
 	var barperlast=barper
 	var beatlen=60/bpm
-	var needle = audio_sound_get_track_position(aud)+menuobj.offset;
+	var needle = audio_sound_get_track_position(aud)//+menuobj.offset;
 	var left = beat * beatlen;
 	var right = left + beatlen;
 	barper = remap(needle, left, right, 0, 1);
