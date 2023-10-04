@@ -19,77 +19,6 @@
 		}
 		else
 		{
-			audio_play_sound(bobmiss,1000,false)
-			note[num][2]=true
-		}
-	}
-	var cares=false
-	if(!menuobj.downscroll)
-	{
-		if((((-(cbeat-note[num][0])/mspeed)*room_width)+128)<room_width&&(((-(cbeat-note[num][0])/mspeed)*room_width)+128)>0)
-		{
-			cares=true
-			if(note[num][2]&&menuobj.arrows==0)
-			{
-				var sizey=(((-(cbeat-note[num][0])/mspeed)*room_width)+128)/128
-				if(note[num][1]<2)
-				{
-					draw_circle(((-(cbeat-note[num][0])/mspeed)*room_width)+128+rowpos[note[num][1]][0],32+(note[num][1]*64)+rowpos[note[num][1]][1],(32+(note[num][1]*3))*size,note[num][1])
-				}
-				else
-				{
-					draw_rectangle(((-(cbeat-note[num][0])/mspeed)*room_width)+128-(32*sizey)+rowpos[note[num][1]][0],(32-(32*sizey))+128+rowpos[note[num][1]][1],((-(cbeat-note[num][0])/mspeed)*room_width)+128+(32*sizey)+rowpos[note[num][1]][0],(32+(32*sizey))+128+rowpos[note[num][1]][1],true)
-				}
-			}
-			if(-(cbeat-note[num][0])<0&&!note[num][3]&&note[num][1]!=3||!menuobj.spdrumroll&&-(cbeat-note[num][0])<0&&!note[num][3])
-			{
-				notes+=1
-				note[num][3]=true
-				audio_play_sound(asset_get_index("hit"+string(note[num][1]+1)),1000,false)
-			}
-			if(!note[num][2])
-			{
-				if(menuobj.arrows>=1)
-				{
-					draw_sprite(menuobj.notestyles[menuobj.arrows],note[num][1],((-(cbeat-note[num][0])/mspeed)*room_width)+128+rowpos[note[num][1]][0],(note[num][1]*64)+rowpos[note[num][1]][1]+32)
-				}
-				else
-				{
-					if(note[num][1]<2)
-					{
-						draw_circle(((-(cbeat-note[num][0])/mspeed)*room_width)+128+rowpos[note[num][1]][0],32+(note[num][1]*64)+rowpos[note[num][1]][1],32+(note[num][1]*3),note[num][1])
-					}
-					else if(note[num][1]==3)
-					{
-						draw_sprite(partialcirc,1,((-(cbeat-note[num][0])/mspeed)*room_width)+128+rowpos[note[num][1]][0],(32*note[num][4])+32+(note[num][1]*64)+rowpos[note[num][1]][1])
-					}
-					else
-					{
-						draw_rectangle((((-(cbeat-note[num][0])/mspeed)*room_width)+128-32)+rowpos[note[num][1]][0],(0+(note[num][1]*64))+rowpos[note[num][1]][1],(((-(cbeat-note[num][0])/mspeed)*room_width)+128+32)+rowpos[note[num][1]][0],(64+(note[num][1]*64))+rowpos[note[num][1]][1],true)
-					}
-				}
-				if(menuobj.badge[0].active&&ballcapcanhit)
-				{
-					draw_sprite(ballcapoverlay,0,((-(cbeat-note[num][0])/mspeed)*room_width)+128,32+(note[num][1]*64))
-				}
-				if(alarm[1]<=0&&menuobj.badge[8].active&&firenotes[num])
-				{
-					draw_sprite(fireoverlay,0,((-(cbeat-note[num][0])/mspeed)*room_width)+128,32+(note[num][1]*64))
-				}
-				if(alarm[1]<=0&&menuobj.badge[3].active&&bobnotes[num])
-				{
-					draw_sprite(boboverlay,0,((-(cbeat-note[num][0])/mspeed)*room_width)+128,32+(note[num][1]*64))
-				}
-				if(alarm[1]<=0&&menuobj.badge[9].active&&pugnotes[num])
-				{
-					draw_sprite(pugoverlay,0,((-(cbeat-note[num][0])/mspeed)*room_width)+128,32+(note[num][1]*64))
-				}
-				if(arlorow==note[num][1]&&menuobj.badge[11].active)
-				{
-					draw_sprite(arlodinky,0,64,32+(note[num][1]*64))
-				}
-				draw_line(128-(leniencyl*256),32+((note[num][1])*64),128+(leniencye*256),32+((note[num][1])*64))
-			}
 			draw_circle(128+rowpos[0][0],32+rowpos[0][1],32,true)
 			draw_circle(128+rowpos[1][0],32+64+rowpos[1][1],32,true)
 			draw_rectangle(128-32+rowpos[2][0],128+32+rowpos[2][1]-32,128+32+rowpos[2][0],128+32+rowpos[2][1]+32,true)
@@ -105,14 +34,6 @@
 			var why=128+rowpos[0][0]
 			for(var iyy=0;iyy<=3;iyy++)
 			{
-				var sizey=(((-(cbeat-note[num][0])/mspeed)*room_height)+128)/128
-				if(note[num][1]<2)
-				{
-					draw_circle(32+(note[num][1]*64)+rowpos[note[num][1]][1],((-(cbeat-note[num][0])/mspeed)*room_width)+128+rowpos[note[num][1]][0],(32+(note[num][1]*3))*size,note[num][1])
-				}
-				else
-				{
-					draw_rectangle((32-(32*sizey))+128+rowpos[note[num][1]][1],((-(cbeat-note[num][0])/mspeed)*room_width)+128-(32*sizey)+rowpos[note[num][1]][0],(32+(32*sizey))+128+rowpos[note[num][1]][1],((-(cbeat-note[num][0])/mspeed)*room_width)+128+(32*sizey)+rowpos[note[num][1]][0],true)
 				if(point_in_rectangle(device_mouse_x_to_gui(0),device_mouse_y_to_gui(0),ecs-32,why-32,ecs+32,why+32)&&mouse_check_button(mb_left))
 				{
 					keyhit[iyy]=true
