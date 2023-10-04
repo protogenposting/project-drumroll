@@ -52,7 +52,7 @@ if(countdown<=0)
 		{
 			menuobj.songlist[sid][2][2]=lcombo
 		}
-		if(fc)
+		if(fc&&!menuobj.auto)
 		{
 			menuobj.songlist[sid][2][3]=2
 		}
@@ -79,6 +79,7 @@ if(countdown<=0)
 		played=true
 	}
 	keyhit=[keyboard_check_pressed(menuobj.bassbind[0])||keyboard_check_pressed(menuobj.bassbind[1])||keyboard_check_pressed(menuobj.bassbind[2]),keyboard_check_pressed(menuobj.snarebind[0])||keyboard_check_pressed(menuobj.snarebind[1])||keyboard_check_pressed(menuobj.snarebind[2]),keyboard_check_pressed(menuobj.cymbalbind),keyboard_check_pressed(menuobj.rollbind[0])||keyboard_check_pressed(menuobj.rollbind[1])]
+	keyhithold=[keyboard_check(menuobj.bassbind[0])||keyboard_check(menuobj.bassbind[1])||keyboard_check(menuobj.bassbind[2]),keyboard_check(menuobj.snarebind[0])||keyboard_check(menuobj.snarebind[1])||keyboard_check(menuobj.snarebind[2]),keyboard_check(menuobj.cymbalbind),keyboard_check(menuobj.rollbind[0])||keyboard_check(menuobj.rollbind[1])]
 	/*var playerdeviceconnected=0
 	if(gamepad_is_connected(4))
 	{
@@ -140,13 +141,22 @@ if(countdown<=0)
 	{
 		audio_sound_pitch(aud,audio_sound_get_pitch(aud)+0.001)
 	}
-	if(menuobj.badge[14].active&&audio_sound_get_pitch(aud)<1.5)
+	if(menuobj.badge[14].active&&audio_sound_get_pitch(aud)<2)
 	{
 		audio_sound_pitch(aud,audio_sound_get_pitch(aud)+0.001)
 	}
-	if(menuobj.badge[14].active&&menuobj.badge[10].active&&audio_sound_get_pitch(aud)<2.5)
+	if(menuobj.badge[14].active&&menuobj.badge[10].active&&audio_sound_get_pitch(aud)<4)
 	{
 		audio_sound_pitch(aud,audio_sound_get_pitch(aud)+0.001)
+	}
+	var tspeed=random_range(0,2)
+	if(menuobj.badge[19].active&&audio_sound_get_pitch(aud)>tspeed)
+	{
+		audio_sound_pitch(aud,audio_sound_get_pitch(aud)-0.1)
+	}
+	if(menuobj.badge[19].active&&audio_sound_get_pitch(aud)<tspeed)
+	{
+		audio_sound_pitch(aud,audio_sound_get_pitch(aud)+0.1)
 	}
 	var barperlast=barper
 	var beatlen=60/bpm
@@ -161,6 +171,13 @@ if(countdown<=0)
 		if(rowsel>3)
 		{
 			rowsel=0
+		}
+	}
+	if(frac(barper)<frac(barperlast))
+	{
+		if(menuobj.badge[18].active)
+		{
+			menuobj.downscroll=!menuobj.downscroll
 		}
 	}
 	cbeat=(barper+beat)+shift

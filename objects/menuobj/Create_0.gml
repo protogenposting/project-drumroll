@@ -138,6 +138,24 @@ badge[17]={
 	sprite: badge17,
 	desc: "shifts all notes up 1 beat"
 }
+badge[18]={
+	active: false,
+	level: 35,
+	sprite: badge19,
+	desc: "turns downscroll on and off every beat"
+}
+badge[19]={
+	active: false,
+	level: 37,
+	sprite: badge19,
+	desc: "makes everything wonky!!1!11"
+}
+badge[20]={
+	active: false,
+	level: 40,
+	sprite: badge19,
+	desc: "changes the move speed of every lane"
+}
 xp=0
 
 level=1

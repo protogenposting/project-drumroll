@@ -10,6 +10,7 @@ accuracy=[]
 function remap(value, left1, right1, left2, right2) {
   return left2 + (value - left1) * (right2 - left2) / (right1 - left1);
 }
+keyhithold=[0,0,0,0]
 am=""
 misses=0
 ghostmisses=0
@@ -56,3 +57,9 @@ rowpost=[[0,0],[0,0],[0,0],[0,0]]
 keynames=["bass","snare","hat","drumroll"]
 
 keyshit=[0,0,0,0]
+lanespeeds=[mspeed,mspeed,mspeed,mspeed]
+if(menuobj.badge[20].active)
+{
+	lanespeeds=[random_range(mspeed*0.1,mspeed*2),random_range(mspeed*0.1,mspeed*2),random_range(mspeed*0.1,mspeed*2),random_range(mspeed*0.1,mspeed*2)]
+}
+aud=-1
