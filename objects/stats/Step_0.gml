@@ -149,6 +149,15 @@ if(countdown<=0)
 	{
 		audio_sound_pitch(aud,audio_sound_get_pitch(aud)+0.001)
 	}
+	var tspeed=random_range(0,2)
+	if(menuobj.badge[19].active&&audio_sound_get_pitch(aud)>tspeed)
+	{
+		audio_sound_pitch(aud,audio_sound_get_pitch(aud)-0.1)
+	}
+	if(menuobj.badge[19].active&&audio_sound_get_pitch(aud)<tspeed)
+	{
+		audio_sound_pitch(aud,audio_sound_get_pitch(aud)+0.1)
+	}
 	var barperlast=barper
 	var beatlen=60/bpm
 	var needle = audio_sound_get_track_position(aud)+menuobj.offset;
@@ -164,9 +173,12 @@ if(countdown<=0)
 			rowsel=0
 		}
 	}
-	if(frac(barper)<frac(barperlast)&&menuobj.badge[18].active)
+	if(frac(barper)<frac(barperlast))
 	{
-		menuobj.downscroll=!menuobj.downscroll
+		if(menuobj.badge[18].active)
+		{
+			menuobj.downscroll=!menuobj.downscroll
+		}
 	}
 	cbeat=(barper+beat)+shift
 }

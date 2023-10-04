@@ -57,3 +57,9 @@ rowpost=[[0,0],[0,0],[0,0],[0,0]]
 keynames=["bass","snare","hat","drumroll"]
 
 keyshit=[0,0,0,0]
+lanespeeds=[mspeed,mspeed,mspeed,mspeed]
+if(menuobj.badge[20].active)
+{
+	lanespeeds=[random_range(mspeed*0.1,mspeed*2),random_range(mspeed*0.1,mspeed*2),random_range(mspeed*0.1,mspeed*2),random_range(mspeed*0.1,mspeed*2)]
+}
+aud=-1
