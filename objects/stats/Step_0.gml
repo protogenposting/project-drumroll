@@ -22,13 +22,10 @@ if(countdown<=0)
 	var defwidth=1366
 	var defheight=768
 	var zoomper=zoom/100
-	if(abs(zoom)>0)
-	{
-		zoom-=(zoom)/60
-	}
 	camera_set_view_pos(view_camera[0],0,0)
 	camera_set_view_size(view_camera[0],defwidth-(defwidth*zoomper),defheight-(defheight*zoomper))
 	camera_set_view_pos(view_camera[0],camera_get_view_x(view_camera[0])+((defwidth*zoomper)/2),camera_get_view_y(view_camera[0])+((defheight*zoomper)/2))
+	camera_set_view_angle(view_camera[0],crot)
 	var acc=0
 	var num=0
 	repeat(array_length(accuracy))
@@ -181,6 +178,39 @@ if(countdown<=0)
 		}
 	}
 	cbeat=(barper+beat)+shift
+	if(abs(crot)>0)
+	{
+		crot-=crotrate*sign(crot)
+	}
+	if(abs(zoom)>0)
+	{
+		zoom-=zoomrate*sign(zoom)
+	}
+	if(cbeat>=censori)
+	{
+		censori=-4
+	}
+	for(var int=0;int<array_length(events);int++)
+	{
+		if(cbeat>=events[int][0]&&!events[int][2])
+		{
+			if(events[int][1]==0)
+			{
+				zoom=events[int][3]
+				zoomrate=events[int][4]
+			}
+			if(events[int][1]==1)
+			{
+				crot=events[int][3]*events[int][4]
+				crotrate=events[int][5]
+			}
+			if(events[int][1]==2)
+			{
+				censori=cbeat+events[int][3]
+			}
+			events[int][2]=true
+		}
+	}
 }
 var num=0
 repeat(array_length(rowpos))

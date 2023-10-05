@@ -1,6 +1,9 @@
 /// @description Insert description here
 // You can write your code in this editor
-
+if(censori>0)
+{
+	draw_sprite(global.censored,0,room_width/2,room_height/2)
+}
 if(hit)
 {
 	nhit=keyhit

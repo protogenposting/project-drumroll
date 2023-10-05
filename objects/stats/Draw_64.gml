@@ -105,14 +105,14 @@
 				cares=true
 				if(note[num][2]&&menuobj.arrows==0)
 				{
-					var size=(((-(cbeat-note[num][0])/mspeed)*room_width)+128)/128
+					var sizey=(((-(cbeat-note[num][0])/mspeed)*room_width)+128)/128
 					if(note[num][1]<2)
 					{
-						draw_circle(((-(cbeat-note[num][0])/mspeed)*room_width)+128+rowpos[note[num][1]][0],32+(note[num][1]*64)+rowpos[note[num][1]][1],(32+(note[num][1]*3))*size,note[num][1])
+						draw_circle(((-(cbeat-note[num][0])/mspeed)*room_width)+128+rowpos[note[num][1]][0],32+(note[num][1]*64)+rowpos[note[num][1]][1],(32+(note[num][1]*3))*sizey,note[num][1])
 					}
 					else
 					{
-						draw_rectangle(((-(cbeat-note[num][0])/mspeed)*room_width)+128-(32*size)+rowpos[note[num][1]][0],(32-(32*size))+128+rowpos[note[num][1]][1],((-(cbeat-note[num][0])/mspeed)*room_width)+128+(32*size)+rowpos[note[num][1]][0],(32+(32*size))+128+rowpos[note[num][1]][1],true)
+						draw_rectangle(((-(cbeat-note[num][0])/mspeed)*room_width)+128-(32*sizey)+rowpos[note[num][1]][0],(32-(32*sizey))+128+rowpos[note[num][1]][1],((-(cbeat-note[num][0])/mspeed)*room_width)+128+(32*sizey)+rowpos[note[num][1]][0],(32+(32*sizey))+128+rowpos[note[num][1]][1],true)
 					}
 				}
 				if(-(cbeat-note[num][0])<0&&!note[num][3]&&note[num][1]!=3||!menuobj.spdrumroll&&-(cbeat-note[num][0])<0&&!note[num][3])
@@ -173,14 +173,14 @@
 				cares=true
 				if(note[num][2]&&menuobj.arrows==0)
 				{
-					var size=(((-(cbeat-note[num][0])/mspeed)*room_height)+128)/128
+					var sizey=(((-(cbeat-note[num][0])/mspeed)*room_height)+128)/128
 					if(note[num][1]<2)
 					{
-						draw_circle(32+(note[num][1]*64)+rowpos[note[num][1]][1],((-(cbeat-note[num][0])/mspeed)*room_width)+128+rowpos[note[num][1]][0],(32+(note[num][1]*3))*size,note[num][1])
+						draw_circle(32+(note[num][1]*64)+rowpos[note[num][1]][1],((-(cbeat-note[num][0])/mspeed)*room_width)+128+rowpos[note[num][1]][0],(32+(note[num][1]*3))*sizey,note[num][1])
 					}
 					else
 					{
-						draw_rectangle((32-(32*size))+128+rowpos[note[num][1]][1],((-(cbeat-note[num][0])/mspeed)*room_width)+128-(32*size)+rowpos[note[num][1]][0],(32+(32*size))+128+rowpos[note[num][1]][1],((-(cbeat-note[num][0])/mspeed)*room_width)+128+(32*size)+rowpos[note[num][1]][0],true)
+						draw_rectangle((32-(32*sizey))+128+rowpos[note[num][1]][1],((-(cbeat-note[num][0])/mspeed)*room_width)+128-(32*sizey)+rowpos[note[num][1]][0],(32+(32*sizey))+128+rowpos[note[num][1]][1],((-(cbeat-note[num][0])/mspeed)*room_width)+128+(32*sizey)+rowpos[note[num][1]][0],true)
 					}
 				}
 				if(-(cbeat-note[num][0])<0&&!note[num][3]&&note[num][1]!=3||!menuobj.spdrumroll&&-(cbeat-note[num][0])<0&&!note[num][3])
@@ -254,10 +254,6 @@
 							alarm[0]=32
 							alt=!alt
 						}
-						if(zoom<=5)
-						{
-							zoom=5
-						}
 						array_push(accuracy,scorefromhit)
 						if(scorefromhit<50)
 						{
@@ -291,7 +287,7 @@
 								part_system_position(p,((-(cbeat-note[num][0])/mspeed)*room_width)+128+rowpos[note[num][1]][0],(note[num][1]*64)+rowpos[note[num][1]][1])
 							}
 						}
-						rot=choose(22.5,-22.5)
+						//rot=choose(22.5,-22.5)
 						size=1.5
 						if(note[num][1]!=3||!menuobj.spdrumroll)
 						{
@@ -347,7 +343,7 @@
 	}
 	if(notes>1)
 	{
-		zoom=10
+		
 	}
 
 

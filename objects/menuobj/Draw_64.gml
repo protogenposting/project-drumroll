@@ -258,6 +258,34 @@ if(room==menu&&alarm[0]<=0)
 					}
 					nummy+=1
 				}
+				var nummy=0
+				ecs2=ecs+256+(32*4)
+				repeat(array_length(events))
+				{
+					if(events[nummy][0]==beaty&&events[nummy][1]==eventsel)
+					{
+						draw_circle(ecs2+16,why2+16,8,true)
+						var eventtext=[]
+						var p=3
+						repeat(array_length(events[nummy])-3)
+						{
+							array_push(eventtext,eventtypes[events[nummy][1]][1][p-3]+": "+string(events[nummy][p]))
+							p++;
+						}
+						draw_text(ecs2+64,why2,eventtext)
+						if(point_in_rectangle(mouse_x,mouse_y,ecs2,why2,ecs2+32,why2+32)&&!pressed)
+						{
+							if(mouse_check_button_pressed(mb_left))
+							{
+								array_delete(events,nummy,1)
+								pressed=true
+								break;
+							}
+						}
+					}
+					nummy++
+				}
+				ecs2=ecs+256
 				draw_text(ecs2,why2,string(beaty+1))
 				draw_rectangle(ecs2,why2,ecs2+32,why2+32,true)
 				if(point_in_rectangle(mouse_x,mouse_y,ecs2,why2,ecs2+32,why2+32)&&mouse_check_button_pressed(mb_left)&&!pressed)
@@ -290,12 +318,28 @@ if(room==menu&&alarm[0]<=0)
 					array_push(eventy,[beaty,3,false,false,prevbeathadahold])
 					break;
 				}
+				ecs2+=32
+				draw_rectangle(ecs2,why2,ecs2+32,why2+32,true)
+				if(point_in_rectangle(mouse_x,mouse_y,ecs2,why2,ecs2+32,why2+32)&&mouse_check_button_pressed(mb_left)&&!pressed)
+				{
+					pressed=true
+					var arr=[beaty,eventsel,false]
+					var nummyoa=0
+					repeat(array_length(eventtypes[eventsel][1]))
+					{
+						array_push(arr,get_integer(eventtypes[eventsel][1][nummyoa],eventtypes[eventsel][2][nummyoa]))
+						nummyoa++;
+					}
+					array_push(events,arr)
+					break;
+				}
 				why2+=32
 				beaty+=beatzoom
 			}
 			draw_text_ext(ecs+64,why-64,"bpm: "+string(dbpm),16,1024)
 			draw_text_ext(ecs+512,why-64,"beat: "+string(cbeat),16,1024)
 			draw_text_ext(ecs+512,why-32,"zoom: "+string(beatzoom),16,1024)
+			draw_text_ext(ecs+512,why-16,"event selected: "+eventtypes[eventsel][0],16,1024)
 		}
 		draw_set_color(c_gray)
 		draw_rectangle(ecs-64-size,why-32-size,ecs+64+size,why+32+size,false)

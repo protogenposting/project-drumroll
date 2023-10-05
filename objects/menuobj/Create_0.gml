@@ -1,5 +1,6 @@
 /// @description Insert description here
 // You can write your code in this editor
+global.censored=sprite_add("CENCORED.png",1,false,false,1920/2,1080/2)
 alarm[0]=60
 randomize()
 alt=false
@@ -11,6 +12,9 @@ spdrumroll=true
 drumsounds=true
 notestyles=[0,arrowsprs,barsprs,drumscolored,arrowsprscolored,barsprscolored]
 notestylenames=["classic drums","arrows","bars","colored drums","colored arrows","colored bars"]
+eventsel=0
+eventtypes=[["zoom bop",["intensity","decrease rate"],[15,1]],["rotate bop",["intensity","direction","decrease rate"],[15,-1,1]],["censor",["time (beats)"],[1]]]
+events=[]
 songlist=[["energy island.txt","energy island.ogg",[0,0,0,0]],["uranus.txt","protogen posting - uranus.ogg",[0,0,0,0]],["spirals.txt","spirals.ogg",[0,0,0,0]],["be cool.txt","be cool.ogg",[0,0,0,0]],["weird.txt","weird.ogg",[0,0,0,0]],["polyrights.txt","polyrights.ogg",[0,0,0,0]],["failed experiment.txt","failed experiment.ogg",[0,0,0,0]],["Round5.txt","Round5.ogg",[0,0,0,0]]]
 
 smenu=0
@@ -147,13 +151,13 @@ badge[18]={
 badge[19]={
 	active: false,
 	level: 37,
-	sprite: badge19,
+	sprite: badge20,
 	desc: "makes everything wonky!!1!11"
 }
 badge[20]={
 	active: false,
 	level: 40,
-	sprite: badge19,
+	sprite: badge21,
 	desc: "changes the move speed of every lane"
 }
 xp=0
@@ -391,7 +395,8 @@ save_level=function(){
 	reset_hit()
 	var _saveData = {
 		eventy:menuobj.eventy,
-		dbpm:menuobj.dbpm
+		dbpm:menuobj.dbpm,
+		events: menuobj.events
 	}
 	
 	var _string = json_stringify(_saveData)
@@ -434,6 +439,10 @@ save_level=function(){
 			menuobj.eventy=_loadData.eventy
 			reset_hit()
 			menuobj.dbpm=_loadData.dbpm
+			if(variable_struct_exists(_loadData,"events"))
+			{
+				menuobj.events=_loadData.events
+			}
 		}
 		else
 		{
@@ -464,6 +473,10 @@ save_level=function(){
 			inst.note=_loadData.eventy
 			inst.bpm=_loadData.dbpm
 			inst.sid=songid
+			if(variable_struct_exists(_loadData,"events"))
+			{
+				inst.events=_loadData.events
+			}
 			array_sort(inst.note,sort_by_beat)
 			if(song!="")
 			{

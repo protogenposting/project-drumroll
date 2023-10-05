@@ -22,7 +22,12 @@ ind=0
 hit=false
 sprite=[[idle1,idle1],[hitdrumleft1,hitdrumright1],[hitsnareleft1,hitsnareright1],[hitrimleft1,hitrimright1],[hitdrumleft1,hitdrumright1]]
 alt=false
+
 zoom=0
+crot=0
+crotrate=0
+zoomrate=0
+censori=0
 countdown=4
 alarm[1]=1
 alarm[0]=1
@@ -63,3 +68,4 @@ if(menuobj.badge[20].active)
 	lanespeeds=[random_range(mspeed*0.1,mspeed*2),random_range(mspeed*0.1,mspeed*2),random_range(mspeed*0.1,mspeed*2),random_range(mspeed*0.1,mspeed*2)]
 }
 aud=-1
+events=[]

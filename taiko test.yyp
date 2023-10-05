@@ -33,6 +33,7 @@
     {"resourceType":"GMIncludedFile","resourceVersion":"1.0","name":"be cool","CopyToMask":-1,"filePath":"datafiles",},
     {"resourceType":"GMIncludedFile","resourceVersion":"1.0","name":"be cool.ogg","CopyToMask":-1,"filePath":"datafiles",},
     {"resourceType":"GMIncludedFile","resourceVersion":"1.0","name":"be cool.txt","CopyToMask":-1,"filePath":"datafiles",},
+    {"resourceType":"GMIncludedFile","resourceVersion":"1.0","name":"CENCORED.png","CopyToMask":-1,"filePath":"datafiles",},
     {"resourceType":"GMIncludedFile","resourceVersion":"1.0","name":"desktop.ini","CopyToMask":-1,"filePath":"datafiles",},
     {"resourceType":"GMIncludedFile","resourceVersion":"1.0","name":"energy island.ogg","CopyToMask":-1,"filePath":"datafiles",},
     {"resourceType":"GMIncludedFile","resourceVersion":"1.0","name":"energy island.txt","CopyToMask":-1,"filePath":"datafiles",},
@@ -55,7 +56,7 @@
   "isEcma": false,
   "LibraryEmitters": [],
   "MetaData": {
-    "IDEVersion": "2023.8.1.102",
+    "IDEVersion": "2023.8.0.98",
   },
   "resources": [
     {"id":{"name":"badge14","path":"sprites/badge14/badge14.yy",},},
@@ -71,6 +72,7 @@
     {"id":{"name":"partialcirc","path":"sprites/partialcirc/partialcirc.yy",},},
     {"id":{"name":"offsetmusic","path":"sounds/offsetmusic/offsetmusic.yy",},},
     {"id":{"name":"barsprs","path":"sprites/barsprs/barsprs.yy",},},
+    {"id":{"name":"badge21","path":"sprites/badge21/badge21.yy",},},
     {"id":{"name":"save_file","path":"scripts/save_file/save_file.yy",},},
     {"id":{"name":"FULLCOMBO","path":"sounds/FULLCOMBO/FULLCOMBO.yy",},},
     {"id":{"name":"badge18","path":"sprites/badge18/badge18.yy",},},
@@ -115,6 +117,7 @@
     {"id":{"name":"pugoverlay","path":"sprites/pugoverlay/pugoverlay.yy",},},
     {"id":{"name":"hitsnareright1","path":"sprites/hitsnareright1/hitsnareright1.yy",},},
     {"id":{"name":"badge5","path":"sprites/badge5/badge5.yy",},},
+    {"id":{"name":"badge20","path":"sprites/badge20/badge20.yy",},},
     {"id":{"name":"drumrollkeyicon","path":"sprites/drumrollkeyicon/drumrollkeyicon.yy",},},
     {"id":{"name":"Sound1","path":"sounds/Sound1/Sound1.yy",},},
     {"id":{"name":"badge19","path":"sprites/badge19/badge19.yy",},},

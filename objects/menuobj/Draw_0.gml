@@ -1,6 +1,6 @@
 /// @description Insert description here
 // You can write your code in this editor
-if(cbpm!=0&&room!=Room1)
+if(cbpm!=0&&room!=Room1&&menuseleted!=2)
 {
 	var beatlen=(60/cbpm)/2
 	var oldcbeat=cbeat

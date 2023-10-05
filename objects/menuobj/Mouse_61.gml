@@ -9,6 +9,14 @@ if(keyboard_check(vk_control))
 	}
 	stnote=floor(stnote)
 }
+else if(keyboard_check(vk_shift))
+{
+	eventsel-=1
+	if(eventsel<0)
+	{
+		eventsel=0
+	}
+}
 else
 {
 	stnote+=beatzoom
