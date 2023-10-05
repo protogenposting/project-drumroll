@@ -1,8 +1,19 @@
 /// @description Insert description here
 // You can write your code in this editor
+	var leniencyl=leniency+((menuobj.badge[8].active&&firenotes[num])*0.1)+((menuobj.badge[9].active&&pugnotes[num])*0.1)
+	var leniencye=leniency+((menuobj.badge[8].active&&firenotes[num])*0.1)+((menuobj.badge[9].active&&pugnotes[num])*0.1)
 	var ballcaphit=false
 	if(!menuobj.downscroll)
 	{
+		var ecs=128+rowpos[0][0]
+		var why=32+rowpos[0][1]
+		repeat(4)
+		{
+			draw_set_color(c_gray)
+			draw_rectangle(ecs-(leniencyl*256),why-32,ecs+(leniencye*256),why+32,false)
+			draw_set_color(c_white)
+			why+=64
+		}
 		if(menuobj.arrows>=1)
 		{
 			var ecs=128+rowpos[0][0]
@@ -44,6 +55,15 @@
 	}
 	else
 	{
+		var ecs=32+rowpos[0][1]
+		var why=128+rowpos[0][0]
+		repeat(4)
+		{
+			draw_set_color(c_gray)
+			draw_rectangle(ecs-32,why-(leniencyl*256),ecs+32,why+(leniencye*256),false)
+			draw_set_color(c_white)
+			ecs+=64
+		}
 		if(menuobj.arrows>=1)
 		{
 			var ecs=32+rowpos[0][1]
@@ -194,7 +214,6 @@
 					{
 						draw_sprite(arlodinky,0,64,32+(note[num][1]*64))
 					}
-					draw_line(128-(leniencyl*256),32+((note[num][1])*64),128+(leniencye*256),32+((note[num][1])*64))
 				}
 			}
 		}
@@ -262,7 +281,6 @@
 					{
 						draw_sprite(arlodinky,0,32+(note[num][1]*64),64)
 					}
-					draw_line(32+((note[num][1])*64),128-(leniencyl*256),32+((note[num][1])*64),128+(leniencye*256))
 				}
 			}
 		}
