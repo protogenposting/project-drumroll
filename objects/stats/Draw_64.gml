@@ -1,5 +1,6 @@
 /// @description Insert description here
 // You can write your code in this editor
+	draw_set_valign(fa_center)
 	var leniencyl=leniency+((menuobj.badge[8].active&&firenotes[num])*0.1)+((menuobj.badge[9].active&&pugnotes[num])*0.1)
 	var leniencye=leniency+((menuobj.badge[8].active&&firenotes[num])*0.1)+((menuobj.badge[9].active&&pugnotes[num])*0.1)
 	var ballcaphit=false
@@ -20,6 +21,11 @@
 			var why=32+rowpos[0][1]
 			for(var iyy=0;iyy<=3;iyy++)
 			{
+				if(point_in_rectangle(device_mouse_x_to_gui(0),device_mouse_y_to_gui(0),ecs-32,why-32,ecs+32,why+32)&&mouse_check_button(mb_left))
+				{
+					keyhit[iyy]=true
+				}
+				draw_sprite_ext(menuobj.notestyles[menuobj.arrows],iyy,ecs,why,1+keyhithold[iyy]*0.1,1+keyhithold[iyy]*0.1,-90,c_white,1)
 				var buttonid;
 				switch(iyy){
 					case 0:
@@ -35,12 +41,7 @@
 					buttonid=menuobj.rollbind[0]
 					break;
 				}
-				draw_text(ecs-64,why,chr(buttonid))
-				if(point_in_rectangle(device_mouse_x_to_gui(0),device_mouse_y_to_gui(0),ecs-32,why-32,ecs+32,why+32)&&mouse_check_button(mb_left))
-				{
-					keyhit[iyy]=true
-				}
-				draw_sprite_ext(menuobj.notestyles[menuobj.arrows],iyy,ecs,why,1+keyhithold[iyy]*0.1,1+keyhithold[iyy]*0.1,-90,c_white,1)
+				draw_text(ecs,why,chr(buttonid))
 				why+=64
 			}
 		}
@@ -70,27 +71,27 @@
 			var why=128+rowpos[0][0]
 			for(var iyy=0;iyy<=3;iyy++)
 			{
-				var buttonid;
-				switch(iyy){
-						case 0:
-						buttonid=menuobj.bassbind[0]
-						break;
-						case 1:
-						buttonid=menuobj.snarebind[0]
-						break;
-						case 2:
-						buttonid=menuobj.cymbalbind
-						break;
-						case 3:
-						buttonid=menuobj.rollbind[0]
-						break;
-				}
-				draw_text(ecs,why-64,chr(buttonid))
 				if(point_in_rectangle(device_mouse_x_to_gui(0),device_mouse_y_to_gui(0),ecs-32,why-32,ecs+32,why+32)&&mouse_check_button(mb_left))
 				{
 					keyhit[iyy]=true
 				}
 				draw_sprite_ext(menuobj.notestyles[menuobj.arrows],iyy,ecs,why,1+keyhithold[iyy]*0.1,1+keyhithold[iyy]*0.1,0,c_white,1)
+				var buttonid;
+				switch(iyy){
+					case 0:
+					buttonid=menuobj.bassbind[0]
+					break;
+					case 1:
+					buttonid=menuobj.snarebind[0]
+					break;
+					case 2:
+					buttonid=menuobj.cymbalbind
+					break;
+					case 3:
+					buttonid=menuobj.rollbind[0]
+					break;
+				}
+				draw_text(ecs,why,chr(buttonid))
 				ecs+=64
 			}
 		}
