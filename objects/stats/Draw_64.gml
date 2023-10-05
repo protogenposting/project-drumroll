@@ -104,6 +104,7 @@
 		}
 		draw_text(256,32,am)
 	}
+	draw_set_valign(fa_top)
 	var num=0
 	var notes=0
 	hit=false
