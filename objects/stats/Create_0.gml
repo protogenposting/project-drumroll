@@ -31,6 +31,7 @@ censori=0
 countdown=4
 alarm[1]=1
 alarm[0]=1
+alarm[4]=360*2
 sprnum=0
 keyhit=[0,0,0,0]
 combo=0

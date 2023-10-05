@@ -10,7 +10,7 @@ repeat(2)
 sprnum+=1
 audio_play_sound(hit3,1000,false)
 countdown-=1
-if(sprnum<array_length(sprite))
+if(sprnum<array_length(sprite)-1)
 {
 	alarm[1]=(60/bpm)*64
 }

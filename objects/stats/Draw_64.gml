@@ -9,6 +9,22 @@
 			var why=32+rowpos[0][1]
 			for(var iyy=0;iyy<=3;iyy++)
 			{
+				var buttonid;
+				switch(iyy){
+					case 0:
+					buttonid=menuobj.bassbind[0]
+					break;
+					case 1:
+					buttonid=menuobj.snarebind[0]
+					break;
+					case 2:
+					buttonid=menuobj.cymbalbind
+					break;
+					case 3:
+					buttonid=menuobj.rollbind[0]
+					break;
+				}
+				draw_text(ecs-64,why,chr(buttonid))
 				if(point_in_rectangle(device_mouse_x_to_gui(0),device_mouse_y_to_gui(0),ecs-32,why-32,ecs+32,why+32)&&mouse_check_button(mb_left))
 				{
 					keyhit[iyy]=true
@@ -34,6 +50,22 @@
 			var why=128+rowpos[0][0]
 			for(var iyy=0;iyy<=3;iyy++)
 			{
+				var buttonid;
+				switch(iyy){
+						case 0:
+						buttonid=menuobj.bassbind[0]
+						break;
+						case 1:
+						buttonid=menuobj.snarebind[0]
+						break;
+						case 2:
+						buttonid=menuobj.cymbalbind
+						break;
+						case 3:
+						buttonid=menuobj.rollbind[0]
+						break;
+				}
+				draw_text(ecs,why-64,chr(buttonid))
 				if(point_in_rectangle(device_mouse_x_to_gui(0),device_mouse_y_to_gui(0),ecs-32,why-32,ecs+32,why+32)&&mouse_check_button(mb_left))
 				{
 					keyhit[iyy]=true
@@ -374,7 +406,7 @@
 	{
 		var pressing=keyboard_check(menuobj.bassbind[num])
 		draw_sprite(basskeyicon,pressing,ecs,why)
-		draw_text(ecs+32,why+32,string(num))
+		draw_text(ecs+32,why+32,chr(menuobj.bassbind[num]))
 		ecs+=64+16
 		num+=1
 	}
@@ -385,7 +417,7 @@
 	{
 		var pressing=keyboard_check(menuobj.snarebind[num])
 		draw_sprite(cymbalkeyicon,pressing,ecs,why)
-		draw_text(ecs+32,why+32,string(num))
+		draw_text(ecs+32,why+32,chr(menuobj.snarebind[num]))
 		ecs+=64+16
 		num+=1
 	}
@@ -396,7 +428,7 @@
 	{
 		var pressing=keyboard_check(menuobj.cymbalbind)
 		draw_sprite(drumrollkeyicon,pressing,ecs,why)
-		draw_text(ecs+32,why+32,string(num))
+		draw_text(ecs+32,why+32,chr(menuobj.cymbalbind))
 		ecs+=64+16
 		num+=1
 	}
@@ -407,7 +439,7 @@
 	{
 		var pressing=keyboard_check(menuobj.rollbind[num])
 		draw_sprite(snarekeyicon,pressing,ecs,why)
-		draw_text(ecs+32,why+32,string(num))
+		draw_text(ecs+32,why+32,chr(menuobj.rollbind[num]))
 		ecs+=64+16
 		num+=1
 	}
