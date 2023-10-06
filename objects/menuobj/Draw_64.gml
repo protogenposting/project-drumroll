@@ -202,6 +202,46 @@ if(room==menu&&alarm[0]<=0)
 			var beaty=stnote
 			var pressed=false
 			var sethold=false
+			var nummyoa=0
+			var narray=eventy
+			repeat(array_length(eventy))
+			{
+				if(iscopying)
+				{
+					if(eventy[nummyoa][0]>=beaty&&eventy[nummyoa][0]<beaty+(16*beatzoom))
+					{
+						var tevent=eventy[nummyoa][0]+16*beatzoom
+						array_push(narray,[tevent,eventy[nummyoa][1],false,false,false])
+					}
+				}
+				nummyoa++
+			}
+			eventy=narray
+			narray=events
+			nummyoa=0
+			repeat(array_length(events))
+			{
+				if(iscopyingevents)
+				{
+					if(events[nummyoa][0]>=beaty&&events[nummyoa][0]<beaty+(16*beatzoom))
+					{
+						var tevent=events[nummyoa][0]+16*beatzoom
+						var nevent=[tevent,events[nummyoa][1]]
+						var nummyoaas=2
+						repeat(array_length(events[nummyoa])-2)
+						{
+							array_push(nevent,events[nummyoa][nummyoaas])
+							nummyoaas++
+						}
+						array_push(narray,nevent)
+						
+					}
+				}
+				nummyoa++
+			}
+			events=narray
+			iscopying=false
+			iscopyingevents=false
 			repeat(16)
 			{
 				var prevbeathadahold=sethold

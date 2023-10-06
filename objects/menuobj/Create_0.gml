@@ -269,6 +269,8 @@ menunum[1]=[
 		menuobj.menuseleted=0
 	}},
 ]
+iscopying=false
+iscopyingevents=false
 menunum[2]=[
 	{namey: "change default bpm",func: function(){
 		var str1=get_integer("default bpm",120)
@@ -319,6 +321,18 @@ menunum[2]=[
 		{
 			var sav=save_level()
 			load_level_game(sav,audtype[1])
+		}
+	}},
+	{namey: "copy notes",func: function(){
+		with(menuobj)
+		{
+			iscopying=true
+		}
+	}},
+	{namey: "copy events",func: function(){
+		with(menuobj)
+		{
+			iscopyingevents=true
 		}
 	}},
 	{namey: "back",func: function(){

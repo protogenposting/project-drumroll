@@ -1,8 +1,8 @@
 /// @description Insert description here
 // You can write your code in this editor
 	draw_set_valign(fa_center)
-	var leniencyl=leniency+((menuobj.badge[8].active&&firenotes[num])*0.1)+((menuobj.badge[9].active&&pugnotes[num])*0.1)
-	var leniencye=leniency+((menuobj.badge[8].active&&firenotes[num])*0.1)+((menuobj.badge[9].active&&pugnotes[num])*0.1)
+	var leniencyl=leniency
+	var leniencye=leniency
 	var ballcaphit=false
 	if(!menuobj.downscroll)
 	{
