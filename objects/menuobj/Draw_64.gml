@@ -203,21 +203,18 @@ if(room==menu&&alarm[0]<=0)
 			var pressed=false
 			var sethold=false
 			var nummyoa=0
-			var narray=eventy
 			repeat(array_length(eventy))
 			{
 				if(iscopying)
 				{
 					if(eventy[nummyoa][0]>=beaty&&eventy[nummyoa][0]<beaty+(16*beatzoom))
 					{
-						var tevent=eventy[nummyoa][0]+16*beatzoom
-						array_push(narray,[tevent,eventy[nummyoa][1],false,false,false])
+						var tevent=eventy[nummyoa][0]
+						array_push(nnotes,[tevent,eventy[nummyoa][1],false,false,false])
 					}
 				}
 				nummyoa++
 			}
-			eventy=narray
-			narray=events
 			nummyoa=0
 			repeat(array_length(events))
 			{
@@ -225,7 +222,7 @@ if(room==menu&&alarm[0]<=0)
 				{
 					if(events[nummyoa][0]>=beaty&&events[nummyoa][0]<beaty+(16*beatzoom))
 					{
-						var tevent=events[nummyoa][0]+16*beatzoom
+						var tevent=events[nummyoa][0]
 						var nevent=[tevent,events[nummyoa][1]]
 						var nummyoaas=2
 						repeat(array_length(events[nummyoa])-2)
@@ -233,15 +230,36 @@ if(room==menu&&alarm[0]<=0)
 							array_push(nevent,events[nummyoa][nummyoaas])
 							nummyoaas++
 						}
-						array_push(narray,nevent)
+						array_push(nevents,nevent)
 						
 					}
 				}
 				nummyoa++
 			}
-			events=narray
 			iscopying=false
 			iscopyingevents=false
+			if(pasting)
+			{
+				for(var iy=1;iy<array_length(nnotes);iy++)
+				{
+					var tn = [nnotes[iy][0],nnotes[iy][1],false,false,false]
+					tn[0]+=getnewbeat(nnotes[0],beaty)
+					array_push(eventy,tn)
+				}
+				for(iy=1;iy<array_length(nevents);iy++)
+				{
+					var tn = []
+					var n=0
+					repeat(array_length(nevents[iy]))
+					{
+						array_push(tn,nevents[iy][n])
+						n++
+					}
+					tn[0]+=getnewbeat(nevents[0],beaty)
+					array_push(events,tn)
+				}
+			}
+			pasting=false
 			repeat(16)
 			{
 				var prevbeathadahold=sethold
