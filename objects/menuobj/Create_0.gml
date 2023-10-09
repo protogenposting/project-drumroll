@@ -1,5 +1,10 @@
 /// @description Insert description here
 // You can write your code in this editor
+function getnewbeat(n1,n2){
+	return n2-n1
+}
+
+
 global.censored=sprite_add("CENCORED.png",1,false,false,1920/2,1080/2)
 alarm[0]=60
 randomize()
@@ -10,15 +15,30 @@ downscroll=false
 arrows=5
 spdrumroll=true
 drumsounds=true
+//add the names of custom note sprites files here
 notestyles=[0,arrowsprs,barsprs,drumscolored,arrowsprscolored,barsprscolored]
+//add the names of custom note sprites that you want to show up ingame here
 notestylenames=["classic drums","arrows","bars","colored drums","colored arrows","colored bars"]
+
 eventsel=0
+
+//add custom event stuff for the editor here
 eventtypes=[["zoom bop",["intensity","decrease rate"],[15,1]],["rotate bop",["intensity","direction","decrease rate"],[15,-1,1]],["censor",["time (beats)"],[1]]]
+songlist=[["energy island.txt","energy island.ogg",[0,0,0,0]],["uranus.txt","protogen posting - uranus.ogg",[0,0,0,0]],["spirals.txt","spirals.ogg",[0,0,0,0]],["be cool.txt","be cool.ogg",[0,0,0,0]],["weird.txt","weird.ogg",[0,0,0,0]],["polyrights.txt","polyrights.ogg",[0,0,0,0]],["failed experiment.txt","failed experiment.ogg",[0,0,0,0]],["Round5.txt","Round5.ogg",[0,0,0,0]],["endless.txt","endless.ogg",[0,0,0,0]],]
+
+
+
+
+nnotes=[]
+nevents=[]
 events=[]
-songlist=[["energy island.txt","energy island.ogg",[0,0,0,0]],["uranus.txt","protogen posting - uranus.ogg",[0,0,0,0]],["spirals.txt","spirals.ogg",[0,0,0,0]],["be cool.txt","be cool.ogg",[0,0,0,0]],["weird.txt","weird.ogg",[0,0,0,0]],["polyrights.txt","polyrights.ogg",[0,0,0,0]],["failed experiment.txt","failed experiment.ogg",[0,0,0,0]],["Round5.txt","Round5.ogg",[0,0,0,0]]]
+
+
 
 smenu=0
 
+
+//default keybinds
 bassbind[0]=ord("A")
 bassbind[1]=ord("Q")
 bassbind[2]=ord("Q")
@@ -32,6 +52,7 @@ cymbalbind=ord("K")
 rollbind[0]=ord("L")
 rollbind[1]=ord("Q")
 
+//badges selected by default
 badges=[0,0]
 
 badge[0]={
@@ -197,6 +218,10 @@ function refresh_songlist(){
 		{namey: "back",func: function(){
 			menuobj.menuseleted=0
 		}},
+		{namey: "HP mode: "+string(menuobj.hpmode),func: function(){
+		menuobj.hpmode=!menuobj.hpmode
+		namey="HP mode: "+string(menuobj.hpmode)
+		}},
 	]
 	var num=0
 	repeat(array_length(songlist))
@@ -264,13 +289,19 @@ menunum[0]=[
 		game_end()
 	}},
 ]
+hpmode=false
 menunum[1]=[
 	{namey: "back",func: function(){
 		menuobj.menuseleted=0
 	}},
+	{namey: "HP mode: "+string(menuobj.hpmode),func: function(){
+		menuobj.hpmode=!menuobj.hpmode
+		namey="HP mode: "+string(menuobj.hpmode)
+	}},
 ]
 iscopying=false
 iscopyingevents=false
+pasting=false
 menunum[2]=[
 	{namey: "change default bpm",func: function(){
 		var str1=get_integer("default bpm",120)
@@ -326,13 +357,18 @@ menunum[2]=[
 	{namey: "copy notes",func: function(){
 		with(menuobj)
 		{
+			nnotes=[stnote]
 			iscopying=true
+			nevents=[stnote]
+			iscopyingevents=true
 		}
 	}},
-	{namey: "copy events",func: function(){
+	{namey: "paste notes",func: function(){
 		with(menuobj)
 		{
-			iscopyingevents=true
+			pasting=true
+			iscopying=false
+			iscopyingevents=false
 		}
 	}},
 	{namey: "back",func: function(){
@@ -573,7 +609,8 @@ save_story_levels=function(){
 		downscroll: menuobj.downscroll,
 		arrows: menuobj.arrows,
 		drumsounds: menuobj.drumsounds,
-		spdrumroll: menuobj.spdrumroll
+		spdrumroll: menuobj.spdrumroll,
+		badges: menuobj.badges
 	}
 	save_file(struct,"save.pt")
 }
@@ -641,6 +678,10 @@ load_story_levels=function(){
 		if(variable_struct_exists(str,"spdrumroll"))
 		{
 			menuobj.spdrumroll=str.spdrumroll
+		}
+		if(variable_struct_exists(str,"badges"))
+		{
+			menuobj.badges=str.badges
 		}
 		/*var num=0
 		repeat(array_length(str.savedlevels))

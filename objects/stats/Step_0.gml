@@ -7,7 +7,7 @@ if(combo>lcombo)
 {
 	lcombo=combo
 }
-if(!fc&&menuobj.badge[13].active)
+if(!fc&&menuobj.badge[13].active||menuobj.hpmode&&hp<=0)
 {
 	audio_stop_all()
 	room_goto(menu)
@@ -190,6 +190,7 @@ if(countdown<=0)
 	{
 		censori=-4
 	}
+	//add functions for custom events here
 	for(var int=0;int<array_length(events);int++)
 	{
 		if(cbeat>=events[int][0]&&!events[int][2])

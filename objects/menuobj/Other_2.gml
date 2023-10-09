@@ -57,11 +57,6 @@ menunum[5]=[
 		menuobj.offsetaverage=[]
 		menuobj.menuseleted=6
 	}},
-	{namey: "reset song list",func: function(){
-		menuobj.save_story_levels_no_songlist()
-		menuobj.shouldsave=false
-		game_end()
-	}},
 	{namey: "upscroll "+string(menuobj.downscroll),func: function(){
 		menuobj.downscroll=!menuobj.downscroll
 		namey= "upscroll "+string(menuobj.downscroll)
@@ -81,6 +76,11 @@ menunum[5]=[
 	{namey: "drum sounds "+string(menuobj.drumsounds),func: function(){
 		menuobj.drumsounds=!menuobj.drumsounds
 		namey= "drum sounds "+string(menuobj.drumsounds)
+	}},
+	{namey: "reset song list",func: function(){
+		menuobj.save_story_levels_no_songlist()
+		menuobj.shouldsave=false
+		game_end()
 	}},
 	{namey: "reset save data",func: function(){
 		file_delete("save.pt")
