@@ -15,18 +15,30 @@ downscroll=false
 arrows=5
 spdrumroll=true
 drumsounds=true
+//add the names of custom note sprites files here
 notestyles=[0,arrowsprs,barsprs,drumscolored,arrowsprscolored,barsprscolored]
+//add the names of custom note sprites that you want to show up ingame here
 notestylenames=["classic drums","arrows","bars","colored drums","colored arrows","colored bars"]
+
 eventsel=0
+
+//add custom event stuff for the editor here
 eventtypes=[["zoom bop",["intensity","decrease rate"],[15,1]],["rotate bop",["intensity","direction","decrease rate"],[15,-1,1]],["censor",["time (beats)"],[1]]]
-events=[]
 songlist=[["energy island.txt","energy island.ogg",[0,0,0,0]],["uranus.txt","protogen posting - uranus.ogg",[0,0,0,0]],["spirals.txt","spirals.ogg",[0,0,0,0]],["be cool.txt","be cool.ogg",[0,0,0,0]],["weird.txt","weird.ogg",[0,0,0,0]],["polyrights.txt","polyrights.ogg",[0,0,0,0]],["failed experiment.txt","failed experiment.ogg",[0,0,0,0]],["Round5.txt","Round5.ogg",[0,0,0,0]],["endless.txt","endless.ogg",[0,0,0,0]],]
+
+
+
 
 nnotes=[]
 nevents=[]
+events=[]
+
+
 
 smenu=0
 
+
+//default keybinds
 bassbind[0]=ord("A")
 bassbind[1]=ord("Q")
 bassbind[2]=ord("Q")
@@ -40,6 +52,7 @@ cymbalbind=ord("K")
 rollbind[0]=ord("L")
 rollbind[1]=ord("Q")
 
+//badges selected by default
 badges=[0,0]
 
 badge[0]={
@@ -596,7 +609,8 @@ save_story_levels=function(){
 		downscroll: menuobj.downscroll,
 		arrows: menuobj.arrows,
 		drumsounds: menuobj.drumsounds,
-		spdrumroll: menuobj.spdrumroll
+		spdrumroll: menuobj.spdrumroll,
+		badges: menuobj.badges
 	}
 	save_file(struct,"save.pt")
 }
@@ -664,6 +678,10 @@ load_story_levels=function(){
 		if(variable_struct_exists(str,"spdrumroll"))
 		{
 			menuobj.spdrumroll=str.spdrumroll
+		}
+		if(variable_struct_exists(str,"badges"))
+		{
+			menuobj.badges=str.badges
 		}
 		/*var num=0
 		repeat(array_length(str.savedlevels))

@@ -190,6 +190,7 @@ if(countdown<=0)
 	{
 		censori=-4
 	}
+	//add functions for custom events here
 	for(var int=0;int<array_length(events);int++)
 	{
 		if(cbeat>=events[int][0]&&!events[int][2])
