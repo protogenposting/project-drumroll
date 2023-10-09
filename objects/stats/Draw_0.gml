@@ -1,7 +1,7 @@
 /// @description Insert description here
 // You can write your code in this editor
 image_speed=bpm/120
-draw_sprite(sprite[ind][alt],image_index,room_width/2,room_height/2)
+draw_sprite_ext(sprite[ind][alt],image_index,room_width/2,room_height/2,hp/mhp,hp/mhp,0,c_white,hp/mhp)
 if(doughits>0)
 {
 	draw_sprite(dougdance,image_index,room_width/2,room_height/2)

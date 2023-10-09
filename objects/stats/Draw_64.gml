@@ -133,7 +133,7 @@
 		}
 		var leniencyl=leniency+((menuobj.badge[8].active&&firenotes[num])*0.1)+((menuobj.badge[9].active&&pugnotes[num])*0.1)
 		var leniencye=leniency+((menuobj.badge[8].active&&firenotes[num])*0.1)+((menuobj.badge[9].active&&pugnotes[num])*0.1)
-		if(-(cbeat-note[num][0])<-leniencyl&&(note[num][1]!=3||!menuobj.spdrumroll)&&!note[num][2]&&arlorow!=note[num][1])
+		if(-(cbeat-note[num][0])<-leniencyl&&(note[num][1]!=3||!menuobj.spdrumroll)&&!note[num][2]&&(!menuobj.badge[11].active||arlorow!=note[num][1]))
 		{
 			fc=false
 			if(!menuobj.badge[3].active||!bobnotes[num])
@@ -141,6 +141,10 @@
 				note[num][2]=true
 				array_push(accuracy,0)
 				misses+=1
+				if(menuobj.hpmode)
+				{
+					hp-=1
+				}
 				rating="miss..."
 				combo=0
 				nnum=num+1
@@ -357,6 +361,10 @@
 							scorefromhit*=combo/20
 						}
 						scorey+=scorefromhit
+						if(menuobj.hpmode&&hp<mhp)
+						{
+							hp+=scorefromhit/300
+						}
 						if(menuobj.badge[6].active)
 						{
 							scorey+=scorefromhit

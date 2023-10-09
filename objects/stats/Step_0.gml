@@ -7,7 +7,7 @@ if(combo>lcombo)
 {
 	lcombo=combo
 }
-if(!fc&&menuobj.badge[13].active)
+if(!fc&&menuobj.badge[13].active||menuobj.hpmode&&hp<=0)
 {
 	audio_stop_all()
 	room_goto(menu)

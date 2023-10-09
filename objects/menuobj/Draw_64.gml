@@ -144,7 +144,7 @@ if(room==menu&&alarm[0]<=0)
 		{
 			draw_text(ecs+256,why,"press a key then press the button to bind it")
 		}
-		if(menuseleted==1&&num>0)
+		if(menuseleted==1&&num>1)
 		{
 			if(array_length(songlist[menunum[menuseleted][num].nummy][2])<=3)
 			{

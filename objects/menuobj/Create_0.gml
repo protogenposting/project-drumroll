@@ -20,7 +20,7 @@ notestylenames=["classic drums","arrows","bars","colored drums","colored arrows"
 eventsel=0
 eventtypes=[["zoom bop",["intensity","decrease rate"],[15,1]],["rotate bop",["intensity","direction","decrease rate"],[15,-1,1]],["censor",["time (beats)"],[1]]]
 events=[]
-songlist=[["energy island.txt","energy island.ogg",[0,0,0,0]],["uranus.txt","protogen posting - uranus.ogg",[0,0,0,0]],["spirals.txt","spirals.ogg",[0,0,0,0]],["be cool.txt","be cool.ogg",[0,0,0,0]],["weird.txt","weird.ogg",[0,0,0,0]],["polyrights.txt","polyrights.ogg",[0,0,0,0]],["failed experiment.txt","failed experiment.ogg",[0,0,0,0]],["Round5.txt","Round5.ogg",[0,0,0,0]]]
+songlist=[["energy island.txt","energy island.ogg",[0,0,0,0]],["uranus.txt","protogen posting - uranus.ogg",[0,0,0,0]],["spirals.txt","spirals.ogg",[0,0,0,0]],["be cool.txt","be cool.ogg",[0,0,0,0]],["weird.txt","weird.ogg",[0,0,0,0]],["polyrights.txt","polyrights.ogg",[0,0,0,0]],["failed experiment.txt","failed experiment.ogg",[0,0,0,0]],["Round5.txt","Round5.ogg",[0,0,0,0]],["endless.txt","endless.ogg",[0,0,0,0]],]
 
 nnotes=[]
 nevents=[]
@@ -205,6 +205,10 @@ function refresh_songlist(){
 		{namey: "back",func: function(){
 			menuobj.menuseleted=0
 		}},
+		{namey: "HP mode: "+string(menuobj.hpmode),func: function(){
+		menuobj.hpmode=!menuobj.hpmode
+		namey="HP mode: "+string(menuobj.hpmode)
+		}},
 	]
 	var num=0
 	repeat(array_length(songlist))
@@ -272,9 +276,14 @@ menunum[0]=[
 		game_end()
 	}},
 ]
+hpmode=false
 menunum[1]=[
 	{namey: "back",func: function(){
 		menuobj.menuseleted=0
+	}},
+	{namey: "HP mode: "+string(menuobj.hpmode),func: function(){
+		menuobj.hpmode=!menuobj.hpmode
+		namey="HP mode: "+string(menuobj.hpmode)
 	}},
 ]
 iscopying=false
