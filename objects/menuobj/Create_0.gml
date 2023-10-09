@@ -1,7 +1,6 @@
 /// @description Insert description here
 // You can write your code in this editor
 function getnewbeat(n1,n2){
-	show_message(n2-n1)
 	return n2-n1
 }
 
