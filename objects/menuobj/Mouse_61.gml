@@ -21,3 +21,7 @@ else
 {
 	stnote+=beatzoom
 }
+if(menuseleted==1)
+{
+	pagesel+=1
+}

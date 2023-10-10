@@ -4,7 +4,8 @@ function getnewbeat(n1,n2){
 	return n2-n1
 }
 
-
+smenu=0
+pagesel=0
 global.censored=sprite_add("CENCORED.png",1,false,false,1920/2,1080/2)
 alarm[0]=60
 randomize()
@@ -15,6 +16,8 @@ downscroll=false
 arrows=5
 spdrumroll=true
 drumsounds=true
+
+difficulty=0
 //add the names of custom note sprites files here
 notestyles=[0,arrowsprs,barsprs,drumscolored,arrowsprscolored,barsprscolored]
 //add the names of custom note sprites that you want to show up ingame here
@@ -24,7 +27,7 @@ eventsel=0
 
 //add custom event stuff for the editor here
 eventtypes=[["zoom bop",["intensity","decrease rate"],[15,1]],["rotate bop",["intensity","direction","decrease rate"],[15,-1,1]],["censor",["time (beats)"],[1]]]
-songlist=[["energy island.txt","energy island.ogg",[0,0,0,0]],["uranus.txt","protogen posting - uranus.ogg",[0,0,0,0]],["spirals.txt","spirals.ogg",[0,0,0,0]],["be cool.txt","be cool.ogg",[0,0,0,0]],["weird.txt","weird.ogg",[0,0,0,0]],["polyrights.txt","polyrights.ogg",[0,0,0,0]],["failed experiment.txt","failed experiment.ogg",[0,0,0,0]],["Round5.txt","Round5.ogg",[0,0,0,0]],["endless.txt","endless.ogg",[0,0,0,0]],]
+songlist=[["beepsandblips.txt","beepsandblips.ogg",[0,0,0,0,0]],["uranus.txt","protogen posting - uranus.ogg",[0,0,0,0,1]],["spirals.txt","spirals.ogg",[0,0,0,0,1]],["energy island.txt","energy island.ogg",[0,0,0,0,1]],["endless.txt","endless.ogg",[0,0,0,0,2]],["failed experiment.txt","failed experiment.ogg",[0,0,0,0,2]],["weird.txt","weird.ogg",[0,0,0,0,3]],["be cool.txt","be cool.ogg",[0,0,0,0,4]],["polyrights.txt","polyrights.ogg",[0,0,0,0,4]],["inferno.txt","inferno.ogg",[0,0,0,0,4]],["Round5.txt","Round5.ogg",[0,0,0,0,5]],]
 
 
 
@@ -261,7 +264,8 @@ menunum[0]=[
 					//file_copy(file,file)
 					var nfile = file_copy(file,working_directory+filename_name(file))
 					var nstr = file_copy(str1,working_directory+filename_name(str1))
-					array_push(menuobj.songlist,[filename_name(file),filename_name(str1),[0,0,0]])
+					
+					array_push(menuobj.songlist,[filename_name(file),filename_name(str1),[0,0,0,0,load_song_and_bpm(filename_name(file),filename_name(str1))[3]]])
 					show_debug_message([working_directory+filename_name(file),working_directory+filename_name(str1),[filename_name(file),filename_name(str1)]])
 				}
 				else
@@ -304,10 +308,21 @@ iscopyingevents=false
 pasting=false
 menunum[2]=[
 	{namey: "change default bpm",func: function(){
-		var str1=get_integer("default bpm",120)
+		var str1=get_integer("default bpm",menuobj.dbpm)
 		if(str1!="")
 		{
 			menuobj.dbpm=str1
+		}
+	}},
+	{namey: "change difficulty",func: function(){
+		var str1=get_integer("difficulty (0-5)",menuobj.difficulty)
+		if(str1!="")
+		{
+			menuobj.difficulty=floor(str1)
+			if(menuobj.difficulty>5)
+			{
+				menuobj.difficulty=5
+			}
 		}
 	}},
 	{namey: "import song",func: function(){
@@ -446,7 +461,8 @@ save_level=function(){
 	var _saveData = {
 		eventy:menuobj.eventy,
 		dbpm:menuobj.dbpm,
-		events: menuobj.events
+		events: menuobj.events,
+		difficulty: menuobj.difficulty
 	}
 	
 	var _string = json_stringify(_saveData)
@@ -492,6 +508,10 @@ save_level=function(){
 			if(variable_struct_exists(_loadData,"events"))
 			{
 				menuobj.events=_loadData.events
+			}
+			if(variable_struct_exists(_loadData,"difficulty"))
+			{
+				menuobj.difficulty=_loadData.difficulty
 			}
 		}
 		else
@@ -571,6 +591,19 @@ save_level=function(){
 			var _loadData = json_parse(_string)
 			//show_debug_message("game LOADED DIAPER! "+string(_loadData))
 			var bpmy=_loadData.dbpm
+			var diff=0
+			if(variable_struct_exists(_loadData,"difficulty"))
+			{
+				diff=_loadData.difficulty
+			}
+			else
+			{
+				diff=floor(bpmy/60)
+				if(diff>5)
+				{
+					diff=5
+				}
+			}
 			if(song!="")
 			{
 				var str1=song
@@ -582,8 +615,8 @@ save_level=function(){
 			if(str1!="")
 			{
 				var songy=audio_create_stream(str1)
-				show_debug_message([bpmy,songy,str1])
-				return[bpmy,songy,str1]
+				show_debug_message([bpmy,songy,str1,diff])
+				return[bpmy,songy,str1,diff]
 			}
 		}
 		else

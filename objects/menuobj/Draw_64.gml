@@ -2,35 +2,46 @@
 // You can write your code in this editor
 var playerdeviceconnected=0
 beatzoom=zooms[zselected]
+var page=0
 if(room==menu&&alarm[0]<=0)
 {
 	draw_set_font(Font12)
 	var num=0
 	var ecs=128
 	var why=128
+	var whyst=128
 	var smenuold=smenu
 	repeat(array_length(menunum[menuseleted]))
 	{
-		var size=0
-		if(point_in_rectangle(mouse_x,mouse_y,ecs-64,why-32,ecs+64,why+32))
+		if(num>=13*(pagesel)&&num<=13*(pagesel+1))
 		{
-			smenu=num
-			size=4
-			var playerdeviceconnected=0
-			if(gamepad_is_connected(4))
+			if(point_in_rectangle(mouse_x,mouse_y,ecs-64,why-32,ecs+64,why+32))
 			{
-				var playerdeviceconnected=4
-			}
-			if(gamepad_is_connected(5))
-			{
-				var playerdeviceconnected=5
-			}
-			if(mouse_check_button_pressed(mb_left)||gamepad_button_check_pressed(playerdeviceconnected,gp_face1))
-			{
-				menunum[menuseleted][num].func()
-				break;
+				smenu=num
+				size=4
+				var playerdeviceconnected=0
+				var playerdeviceconnected=0
+				if(gamepad_is_connected(4))
+				{
+					var playerdeviceconnected=4
+				}
+				if(gamepad_is_connected(5))
+				{
+					var playerdeviceconnected=5
+				}
+				if(mouse_check_button_pressed(mb_left)||gamepad_button_check_pressed(playerdeviceconnected,gp_face1))
+				{
+					menunum[menuseleted][num].func()
+					break;
+				}
 			}
 		}
+		else if(menuseleted==1)
+		{
+			num++
+			continue;
+		}
+		var size=0
 		if(menuseleted==0)
 		{
 			if(!audio_is_playing(menutheme)&&alarm[0]<=0)
@@ -146,55 +157,57 @@ if(room==menu&&alarm[0]<=0)
 		}
 		if(menuseleted==1&&num>1)
 		{
-			if(array_length(songlist[menunum[menuseleted][num].nummy][2])<=3)
-			{
-				array_push(songlist[menunum[menuseleted][num].nummy][2],0)
-			}
-			if(songlist[menunum[menuseleted][num].nummy][2][3]==2)
-			{
-				draw_set_color(c_aqua)
-			}
-			else if(songlist[menunum[menuseleted][num].nummy][2][3]==1)
-			{
-				draw_set_color(c_green)
-			}
-			else
-			{
-				draw_set_color(c_gray)
-			}
-			draw_rectangle(ecs-256-size+128,why-32-size,ecs+256+size+128,why+64+size,false)
-			draw_set_color(c_white)
-			draw_text(ecs+128,why-32,"delete")
-			draw_rectangle(ecs-64-size+130,why-32-size,ecs+64+size+130,why+32+size,true)
-			if(point_in_rectangle(mouse_x,mouse_y,ecs-64-size+128,why-32-size,ecs+64+size+128,why+32+size)&&mouse_check_button_pressed(mb_left))
-			{
-				array_delete(songlist,menunum[menuseleted][num].nummy,1)
-				file_delete(menunum[menuseleted][num].sly[0])
-				file_delete(menunum[menuseleted][num].sly[1])
-				array_delete(menunum[menuseleted],num,1)
-				refresh_songlist()
-				break;
-			}
-			if(smenu!=smenuold&&smenu==num)
-			{
-				if(songloaded!="")
+				if(array_length(songlist[menunum[menuseleted][num].nummy][2])<=3)
 				{
-					audio_destroy_stream(songloaded)
+					array_push(songlist[menunum[menuseleted][num].nummy][2],0)
 				}
-				var loaded=load_song_and_bpm(songlist[menunum[menuseleted][num].nummy][0],songlist[menunum[menuseleted][num].nummy][1])
-				if(loaded!=false&&!audio_is_playing(song))
+				if(songlist[menunum[menuseleted][num].nummy][2][3]==2)
 				{
-					alt=false
-					song=loaded[1]
-					audio_stop_all()
-					cbpm=loaded[0]
-					aud=audio_play_sound(loaded[1],1000,true)
-					songloaded=loaded[1]
+					draw_set_color(c_aqua)
 				}
-			}
-			draw_text(ecs+256,why,"score: "+string(songlist[menunum[menuseleted][num].nummy][2][0]))
-			draw_text(ecs+256,why+16,"accuracy: "+string(songlist[menunum[menuseleted][num].nummy][2][1]))
-			draw_text(ecs+256,why+32,"biggest combo: "+string(songlist[menunum[menuseleted][num].nummy][2][2]))
+				else if(songlist[menunum[menuseleted][num].nummy][2][3]==1)
+				{
+					draw_set_color(c_green)
+				}
+				else
+				{
+					draw_set_color(c_gray)
+				}
+				draw_rectangle(ecs-256-size+128,why-32-size,ecs+256+size+128,why+64+size,false)
+				draw_set_color(c_white)
+				draw_text(ecs+128,why-32,"delete")
+				draw_rectangle(ecs-64-size+130,why-32-size,ecs+64+size+130,why+32+size,true)
+				if(point_in_rectangle(mouse_x,mouse_y,ecs-64-size+128,why-32-size,ecs+64+size+128,why+32+size)&&mouse_check_button_pressed(mb_left))
+				{
+					array_delete(songlist,menunum[menuseleted][num].nummy,1)
+					file_delete(menunum[menuseleted][num].sly[0])
+					file_delete(menunum[menuseleted][num].sly[1])
+					array_delete(menunum[menuseleted],num,1)
+					refresh_songlist()
+					break;
+				}
+				if(smenu!=smenuold&&smenu==num)
+				{
+					if(songloaded!="")
+					{
+						audio_destroy_stream(songloaded)
+					}
+					var loaded=load_song_and_bpm(songlist[menunum[menuseleted][num].nummy][0],songlist[menunum[menuseleted][num].nummy][1])
+					if(loaded!=false&&!audio_is_playing(song))
+					{
+						alt=false
+						song=loaded[1]
+						audio_stop_all()
+						cbpm=loaded[0]
+						aud=audio_play_sound(loaded[1],1000,true)
+						songloaded=loaded[1]
+					}
+				}
+				draw_text(ecs+256-42,why-32,number_to_difficulty(songlist[menunum[menuseleted][num].nummy][2][4]))
+				draw_text(ecs+256-42,why,"score: "+string(songlist[menunum[menuseleted][num].nummy][2][0]))
+				draw_text(ecs+256-42,why+16,"accuracy: "+string(songlist[menunum[menuseleted][num].nummy][2][1]))
+				draw_text(ecs+256-42,why+32,"biggest combo: "+string(songlist[menunum[menuseleted][num].nummy][2][2]))
+			
 		}
 		if(menuseleted==2&&num==0)
 		{
@@ -383,12 +396,21 @@ if(room==menu&&alarm[0]<=0)
 					pressed=true
 					var arr=[beaty,eventsel,false]
 					var nummyoa=0
+					var cancelled=false
 					repeat(array_length(eventtypes[eventsel][1]))
 					{
-						array_push(arr,get_integer(eventtypes[eventsel][1][nummyoa],eventtypes[eventsel][2][nummyoa]))
+						var int=get_integer(eventtypes[eventsel][1][nummyoa],eventtypes[eventsel][2][nummyoa])
+						if(int=="")
+						{
+							cancelled=true
+						}
+						array_push(arr,int)
 						nummyoa++;
 					}
-					array_push(events,arr)
+					if(!cancelled)
+					{
+						array_push(events,arr)
+					}
 					break;
 				}
 				why2+=32
@@ -399,27 +421,50 @@ if(room==menu&&alarm[0]<=0)
 			draw_text_ext(ecs+512,why-32,"zoom: "+string(beatzoom),16,1024)
 			draw_text_ext(ecs+512,why-16,"event selected: "+eventtypes[eventsel][0],16,1024)
 		}
-		draw_set_color(c_gray)
-		draw_rectangle(ecs-64-size,why-32-size,ecs+64+size,why+32+size,false)
-		draw_set_color(c_white)
-		draw_rectangle(ecs-64-size,why-32-size,ecs+64+size,why+32+size,true)
-		draw_set_color(c_white)
-		draw_set_halign(fa_center)
-		if(num<array_length(menunum[menuseleted]))
+		if(num>=13*(pagesel)&&num<=13*(pagesel+1)||menuseleted!=1)
 		{
-			draw_text(ecs,why,menunum[menuseleted][num].namey)
+			if(point_in_rectangle(mouse_x,mouse_y,ecs-64,why-32,ecs+64,why+32))
+			{
+				smenu=num
+				size=4
+				var playerdeviceconnected=0
+				var playerdeviceconnected=0
+				if(gamepad_is_connected(4))
+				{
+					var playerdeviceconnected=4
+				}
+				if(gamepad_is_connected(5))
+				{
+					var playerdeviceconnected=5
+				}
+				if(mouse_check_button_pressed(mb_left)||gamepad_button_check_pressed(playerdeviceconnected,gp_face1))
+				{
+					menunum[menuseleted][num].func()
+					break;
+				}
+			}
+			draw_set_color(c_gray)
+			draw_rectangle(ecs-64-size,why-32-size,ecs+64+size,why+32+size,false)
+			draw_set_color(c_white)
+			draw_rectangle(ecs-64-size,why-32-size,ecs+64+size,why+32+size,true)
+			draw_set_color(c_white)
+			draw_set_halign(fa_center)
+			if(num<array_length(menunum[menuseleted]))
+			{
+				draw_text(ecs,why,menunum[menuseleted][num].namey)
+			}
+			draw_set_halign(fa_left)
 		}
-		draw_set_halign(fa_left)
 		num+=1
 		why+=90
-		if(why>room_height/1.1)
+		if(why>(room_height/1.1))
 		{
 			ecs+=128
 			if(menuseleted==1)
 			{
 				ecs+=256+128
 			}
-			why=128
+			why=whyst
 		}
 	}
 	al-=0.01

@@ -70,6 +70,7 @@
     {"name":"arrowsprs","order":15,"path":"sprites/arrowsprs/arrowsprs.yy",},
     {"name":"pugoverlay","order":12,"path":"sprites/pugoverlay/pugoverlay.yy",},
     {"name":"hitsnareright1","order":6,"path":"sprites/hitsnareright1/hitsnareright1.yy",},
+    {"name":"number_to_difficulty","order":3,"path":"scripts/number_to_difficulty/number_to_difficulty.yy",},
     {"name":"badge5","order":6,"path":"sprites/badge5/badge5.yy",},
     {"name":"badge20","order":24,"path":"sprites/badge20/badge20.yy",},
     {"name":"drumrollkeyicon","order":3,"path":"sprites/drumrollkeyicon/drumrollkeyicon.yy",},
