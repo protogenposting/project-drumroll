@@ -18,6 +18,10 @@ if(countdown<=0)
 	if(menuobj.badge[7].active)
 	{
 		accadd+=0.001
+		if(menuobj.hpmode&&hp<mhp)
+		{
+			hp+=0.01
+		}
 	}
 	var defwidth=1366
 	var defheight=768

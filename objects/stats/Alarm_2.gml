@@ -4,6 +4,10 @@ if(menuobj.badge[2].active)
 {
 	misses-=5
 	combo+=5
+	if(menuobj.hpmode&&hp<mhp)
+	{
+		hp+=5
+	}
 	if(misses<0)
 	{
 		misses+=1

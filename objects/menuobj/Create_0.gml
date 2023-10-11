@@ -74,7 +74,7 @@ badge[2]={
 	active: false,
 	level: 4,
 	sprite: badge4,
-	desc: "absorbs 5 misses every 5 seconds and converts them into combo"
+	desc: "absorbs 5 misses every 5 seconds and converts them into combo and hp"
 }
 badge[3]={
 	active: false,
@@ -92,7 +92,7 @@ badge[5]={
 	active: false,
 	level: 9,
 	sprite: badge7,
-	desc: "leniency decreased, only allowing you to get superbs, amazings, and misses"
+	desc: "leniency decreased, only allowing you to get amazings and misses"
 }
 badge[6]={
 	active: false,
@@ -104,7 +104,7 @@ badge[7]={
 	active: false,
 	level: 15,
 	sprite: badge8,
-	desc: "your accuracy slowly increases"
+	desc: "your accuracy and hp slowly increase"
 }
 badge[8]={
 	active: false,
