@@ -283,6 +283,9 @@ menunum[0]=[
 	{namey: "settings",func: function(){
 		menu.menuseleted=5
 	}},
+	{namey: "discord",func: function(){
+		url_open("https://discord.gg/K38YBsabyF")
+	}},
 	{namey: "save",func: function(){
 		with(menu)
 		{

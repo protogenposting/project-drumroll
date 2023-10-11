@@ -203,7 +203,14 @@ if(room==menu&&alarm[0]<=0)
 						songloaded=loaded[1]
 					}
 				}
-				draw_text(ecs+256-42,why-32,number_to_difficulty(songlist[menunum[menuseleted][num].nummy][2][4]))
+				if(array_length(songlist[menunum[menuseleted][num].nummy][2])>=5)
+				{
+					draw_text(ecs+256-42,why-32,number_to_difficulty(songlist[menunum[menuseleted][num].nummy][2][4]))
+				}
+				else
+				{
+					draw_text_ext(128+128,32,"hey! your save file is out of date and has some missing content, send your save file to protogen posting on the discord to have him fix it for you!",16,256)
+				}
 				draw_text(ecs+256-42,why,"score: "+string(songlist[menunum[menuseleted][num].nummy][2][0]))
 				draw_text(ecs+256-42,why+16,"accuracy: "+string(songlist[menunum[menuseleted][num].nummy][2][1]))
 				draw_text(ecs+256-42,why+32,"biggest combo: "+string(songlist[menunum[menuseleted][num].nummy][2][2]))
