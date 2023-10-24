@@ -1,3 +1,6 @@
 /// @description Insert description here
 // You can write your code in this editor
-auto=!auto
+if(!instance_exists(stats))
+{
+	auto=!auto
+}
