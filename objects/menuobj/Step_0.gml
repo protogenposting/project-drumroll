@@ -10,15 +10,8 @@ else
 	view_set_wport(view_current,1366)
 	view_set_hport(view_current,768)
 }
+
 var playerdeviceconnected=0
-if(gamepad_is_connected(4))
-{
-	var playerdeviceconnected=4
-}
-if(gamepad_is_connected(5))
-{
-	var playerdeviceconnected=5
-}
 gamepad_set_axis_deadzone(playerdeviceconnected,0.1)
 if(gamepad_is_connected(playerdeviceconnected))
 {
@@ -26,6 +19,7 @@ if(gamepad_is_connected(playerdeviceconnected))
 	
 	var vaxis = gamepad_axis_value(playerdeviceconnected, gp_axislv)*5;
 	display_mouse_set(display_mouse_get_x()+haxis,display_mouse_get_y()+vaxis)
+	display_mouse_set(display_mouse_get_x()+(gamepad_button_check(playerdeviceconnected,gp_padl)-gamepad_button_check(playerdeviceconnected,gp_padr))*5,display_mouse_get_y()+(gamepad_button_check(playerdeviceconnected,gp_padd)-gamepad_button_check(playerdeviceconnected,gp_padu))*5)
 }
 xptonextlevel=10+((level-1)*4)
 if(xp>=xptonextlevel)

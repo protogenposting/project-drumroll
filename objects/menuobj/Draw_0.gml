@@ -40,6 +40,11 @@ if(cbpm!=0&&room!=Room1&&menuseleted!=2)
 		}
 	}
 	keyhit=[keyboard_check_pressed(menuobj.bassbind[0])||keyboard_check_pressed(menuobj.bassbind[1])||keyboard_check_pressed(menuobj.bassbind[2]),keyboard_check_pressed(menuobj.snarebind[0])||keyboard_check_pressed(menuobj.snarebind[1])||keyboard_check_pressed(menuobj.snarebind[2]),keyboard_check_pressed(menuobj.cymbalbind),keyboard_check_pressed(menuobj.rollbind[0])||keyboard_check_pressed(menuobj.rollbind[1])]
+	var playerdeviceconnected=0
+	if(gamepad_is_connected(playerdeviceconnected))
+	{
+		keyhit=[gamepad_button_check_pressed(playerdeviceconnected,gp_face1),gamepad_button_check_pressed(playerdeviceconnected,gp_face2),gamepad_button_check_pressed(playerdeviceconnected,gp_face4),gamepad_button_check_pressed(playerdeviceconnected,gp_face3)]
+	}
 	if(keyhit[0])
 	{
 		audio_play_sound(hit1,1000,false)
