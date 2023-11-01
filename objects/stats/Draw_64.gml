@@ -293,7 +293,8 @@
 				var scorefromhit=105-(100*abs(note[num][0]-cbeat))
 				if(cares&&-(cbeat-note[num][0])>-leniencyl&&-(cbeat-note[num][0])<leniencye&&!keyshit[note[num][1]]&&!note[num][2])
 				{
-					if(note[num][1]<array_length(keyhit)&&keyhit[note[num][1]]||audio_sound_get_pitch(aud)>1&&menuobj.auto&&scorefromhit>=80||menuobj.auto&&scorefromhit>=100||menuobj.badge[0].active&&ballcapcanhit&&-(cbeat-note[num][0])<0||doughits>0&&menuobj.badge[4].active)
+					playerdeviceconnected=0
+					if(!gamepad_is_connected(playerdeviceconnected)&&note[num][1]<array_length(keyhit)&&keyhit[note[num][1]]||gamepad_is_connected(playerdeviceconnected)&&keyhit[note[num][1]]&&strumming||audio_sound_get_pitch(aud)>1&&menuobj.auto&&scorefromhit>=80||menuobj.auto&&scorefromhit>=100||menuobj.badge[0].active&&ballcapcanhit&&-(cbeat-note[num][0])<0||doughits>0&&menuobj.badge[4].active)
 					{
 						keyshit[note[num][1]]=1
 						doughits-=1
@@ -414,7 +415,7 @@
 		{
 			arlorow=num
 		}
-		if(keyhit[num]&&!hit&&!ballcaphit)
+		if(keyhit[num]&&!keyshit[num]&&!ballcaphit)
 		{
 			ghostmisses+=1
 			rating="ghost miss..."
@@ -433,6 +434,11 @@
 	repeat(array_length(menuobj.bassbind))
 	{
 		var pressing=keyboard_check(menuobj.bassbind[num])
+		var playerdeviceconnected=0
+		if(gamepad_is_connected(playerdeviceconnected))
+		{
+			pressing=keyhit[0]
+		}
 		draw_sprite(basskeyicon,pressing,ecs,why)
 		draw_text(ecs+32,why+32,chr(menuobj.bassbind[num]))
 		ecs+=64+16
@@ -444,6 +450,11 @@
 	repeat(array_length(menuobj.snarebind))
 	{
 		var pressing=keyboard_check(menuobj.snarebind[num])
+		var playerdeviceconnected=0
+		if(gamepad_is_connected(playerdeviceconnected))
+		{
+			pressing=keyhit[1]
+		}
 		draw_sprite(cymbalkeyicon,pressing,ecs,why)
 		draw_text(ecs+32,why+32,chr(menuobj.snarebind[num]))
 		ecs+=64+16
@@ -455,6 +466,11 @@
 	repeat(1)
 	{
 		var pressing=keyboard_check(menuobj.cymbalbind)
+		var playerdeviceconnected=0
+		if(gamepad_is_connected(playerdeviceconnected))
+		{
+			pressing=keyhit[2]
+		}
 		draw_sprite(drumrollkeyicon,pressing,ecs,why)
 		draw_text(ecs+32,why+32,chr(menuobj.cymbalbind))
 		ecs+=64+16
@@ -466,6 +482,11 @@
 	repeat(array_length(menuobj.rollbind))
 	{
 		var pressing=keyboard_check(menuobj.rollbind[num])
+		var playerdeviceconnected=0
+		if(gamepad_is_connected(playerdeviceconnected))
+		{
+			pressing=keyhit[3]
+		}
 		draw_sprite(snarekeyicon,pressing,ecs,why)
 		draw_text(ecs+32,why+32,chr(menuobj.rollbind[num]))
 		ecs+=64+16

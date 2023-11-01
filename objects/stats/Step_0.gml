@@ -84,8 +84,9 @@ if(countdown<=0)
 	var playerdeviceconnected=0
 	if(gamepad_is_connected(playerdeviceconnected))
 	{
-		keyhit=[gamepad_button_check_pressed(playerdeviceconnected,gp_face1),gamepad_button_check_pressed(playerdeviceconnected,gp_face2),gamepad_button_check_pressed(playerdeviceconnected,gp_face4),gamepad_button_check_pressed(playerdeviceconnected,gp_face3)]
-		keyhithold=[gamepad_button_check(playerdeviceconnected,gp_face1),gamepad_button_check_pressed(playerdeviceconnected,gp_face2),gamepad_button_check_pressed(playerdeviceconnected,gp_face4),gamepad_button_check(playerdeviceconnected,gp_face3)]
+		strumming=gamepad_button_check_pressed(playerdeviceconnected,gp_padd)||gamepad_button_check_pressed(playerdeviceconnected,gp_padu)
+		keyhit=[gamepad_button_check(playerdeviceconnected,gp_face1)&&strumming,gamepad_button_check(playerdeviceconnected,gp_face2)&&strumming,gamepad_button_check(playerdeviceconnected,gp_face4)&&strumming,gamepad_button_check(playerdeviceconnected,gp_face3)&&strumming]
+		keyhithold=[gamepad_button_check(playerdeviceconnected,gp_face1),gamepad_button_check(playerdeviceconnected,gp_face2),gamepad_button_check(playerdeviceconnected,gp_face4),gamepad_button_check(playerdeviceconnected,gp_face3)]
 	}
 	morehits=false
 	var num=0
