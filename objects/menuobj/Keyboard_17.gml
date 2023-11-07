@@ -7,6 +7,10 @@ if(!instance_exists(stats))
 		auto=!auto
 	}
 }
+if(keyboard_check_pressed(ord("Q")))
+{
+	showFps=!showFps
+}
 if(keyboard_check_pressed(ord("F")))
 {
 	window_set_fullscreen(!window_get_fullscreen())

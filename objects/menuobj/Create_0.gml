@@ -4,6 +4,10 @@ function getnewbeat(n1,n2){
 	return n2-n1
 }
 
+showFps=false
+
+fpschart=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,]
+
 smenu=0
 pagesel=0
 global.censored=sprite_add("CENCORED.png",1,false,false,1920/2,1080/2)
