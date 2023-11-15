@@ -20,6 +20,7 @@
   ],
   "ResourceOrderSettings": [
     {"name":"badge14","order":18,"path":"sprites/badge14/badge14.yy",},
+    {"name":"number_to_difficulty_color","order":4,"path":"scripts/number_to_difficulty_color/number_to_difficulty_color.yy",},
     {"name":"bobmiss","order":7,"path":"sounds/bobmiss/bobmiss.yy",},
     {"name":"badge2","order":1,"path":"sprites/badge2/badge2.yy",},
     {"name":"hitrimleft1","order":3,"path":"sprites/hitrimleft1/hitrimleft1.yy",},

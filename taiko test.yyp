@@ -35,6 +35,8 @@
     {"resourceType":"GMIncludedFile","resourceVersion":"1.0","name":"be cool.txt","CopyToMask":-1,"filePath":"datafiles",},
     {"resourceType":"GMIncludedFile","resourceVersion":"1.0","name":"beepsandblips.ogg","CopyToMask":-1,"filePath":"datafiles",},
     {"resourceType":"GMIncludedFile","resourceVersion":"1.0","name":"beepsandblips.txt","CopyToMask":-1,"filePath":"datafiles",},
+    {"resourceType":"GMIncludedFile","resourceVersion":"1.0","name":"breakbox.ogg","CopyToMask":-1,"filePath":"datafiles",},
+    {"resourceType":"GMIncludedFile","resourceVersion":"1.0","name":"breakbox.txt","CopyToMask":-1,"filePath":"datafiles",},
     {"resourceType":"GMIncludedFile","resourceVersion":"1.0","name":"CENCORED.png","CopyToMask":-1,"filePath":"datafiles",},
     {"resourceType":"GMIncludedFile","resourceVersion":"1.0","name":"desktop.ini","CopyToMask":-1,"filePath":"datafiles",},
     {"resourceType":"GMIncludedFile","resourceVersion":"1.0","name":"endless.ogg","CopyToMask":-1,"filePath":"datafiles",},
@@ -66,6 +68,7 @@
   },
   "resources": [
     {"id":{"name":"badge14","path":"sprites/badge14/badge14.yy",},},
+    {"id":{"name":"number_to_difficulty_color","path":"scripts/number_to_difficulty_color/number_to_difficulty_color.yy",},},
     {"id":{"name":"bobmiss","path":"sounds/bobmiss/bobmiss.yy",},},
     {"id":{"name":"arrowhit","path":"particles/arrowhit/arrowhit.yy",},},
     {"id":{"name":"badge2","path":"sprites/badge2/badge2.yy",},},

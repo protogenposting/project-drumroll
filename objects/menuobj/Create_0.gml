@@ -31,7 +31,7 @@ eventsel=0
 
 //add custom event stuff for the editor here
 eventtypes=[["zoom bop",["intensity","decrease rate"],[15,1]],["rotate bop",["intensity","direction","decrease rate"],[15,-1,1]],["censor",["time (beats)"],[1]]]
-songlist=[["beepsandblips.txt","beepsandblips.ogg",[0,0,0,0,0]],["uranus.txt","protogen posting - uranus.ogg",[0,0,0,0,1]],["spirals.txt","spirals.ogg",[0,0,0,0,1]],["energy island.txt","energy island.ogg",[0,0,0,0,1]],["endless.txt","endless.ogg",[0,0,0,0,2]],["failed experiment.txt","failed experiment.ogg",[0,0,0,0,2]],["weird.txt","weird.ogg",[0,0,0,0,3]],["be cool.txt","be cool.ogg",[0,0,0,0,4]],["polyrights.txt","polyrights.ogg",[0,0,0,0,4]],["inferno.txt","inferno.ogg",[0,0,0,0,4]],["Round5.txt","Round5.ogg",[0,0,0,0,5]],]
+songlist=[["beepsandblips.txt","beepsandblips.ogg",[0,0,0,0,0]],["uranus.txt","protogen posting - uranus.ogg",[0,0,0,0,1]],["spirals.txt","spirals.ogg",[0,0,0,0,1]],["energy island.txt","energy island.ogg",[0,0,0,0,1]],["endless.txt","endless.ogg",[0,0,0,0,2]],["failed experiment.txt","failed experiment.ogg",[0,0,0,0,2]],["weird.txt","weird.ogg",[0,0,0,0,3]],["be cool.txt","be cool.ogg",[0,0,0,0,4]],["polyrights.txt","polyrights.ogg",[0,0,0,0,4]],["inferno.txt","inferno.ogg",[0,0,0,0,4]],["breakbox.txt","breakbox.ogg",[0,0,0,0,5]],["Round5.txt","Round5.ogg",[0,0,0,0,5]],]
 
 
 

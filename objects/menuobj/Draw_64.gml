@@ -157,64 +157,68 @@ if(room==menu&&alarm[0]<=0)
 		}
 		if(menuseleted==1&&num>1)
 		{
-				if(array_length(songlist[menunum[menuseleted][num].nummy][2])<=3)
+			if(array_length(songlist[menunum[menuseleted][num].nummy][2])<=3)
+			{
+				array_push(songlist[menunum[menuseleted][num].nummy][2],0)
+			}
+			if(songlist[menunum[menuseleted][num].nummy][2][3]==2)
+			{
+				draw_set_color(c_aqua)
+			}
+			else if(songlist[menunum[menuseleted][num].nummy][2][3]==1)
+			{
+				draw_set_color(c_green)
+			}
+			else
+			{
+				draw_set_color(c_gray)
+			}
+			draw_rectangle(ecs-256-size+128,why-32-size,ecs+256+size+128,why+64+size,false)
+			draw_set_color(c_white)
+			draw_text(ecs+128,why-32,"delete")
+			draw_rectangle(ecs-64-size+130,why-32-size,ecs+64+size+130,why+32+size,true)
+			if(point_in_rectangle(mouse_x,mouse_y,ecs-64-size+128,why-32-size,ecs+64+size+128,why+32+size)&&mouse_check_button_pressed(mb_left))
+			{
+				array_delete(songlist,menunum[menuseleted][num].nummy,1)
+				file_delete(menunum[menuseleted][num].sly[0])
+				file_delete(menunum[menuseleted][num].sly[1])
+				array_delete(menunum[menuseleted],num,1)
+				refresh_songlist()
+				break;
+			}
+			if(smenu!=smenuold&&smenu==num)
+			{
+				if(songloaded!="")
 				{
-					array_push(songlist[menunum[menuseleted][num].nummy][2],0)
+					audio_destroy_stream(songloaded)
 				}
-				if(songlist[menunum[menuseleted][num].nummy][2][3]==2)
+				var loaded=load_song_and_bpm(songlist[menunum[menuseleted][num].nummy][0],songlist[menunum[menuseleted][num].nummy][1])
+				if(loaded!=false&&!audio_is_playing(song))
 				{
-					draw_set_color(c_aqua)
+					alt=false
+					song=loaded[1]
+					audio_stop_all()
+					cbpm=loaded[0]
+					aud=audio_play_sound(loaded[1],1000,true)
+					songloaded=loaded[1]
 				}
-				else if(songlist[menunum[menuseleted][num].nummy][2][3]==1)
-				{
-					draw_set_color(c_green)
-				}
-				else
-				{
-					draw_set_color(c_gray)
-				}
-				draw_rectangle(ecs-256-size+128,why-32-size,ecs+256+size+128,why+64+size,false)
-				draw_set_color(c_white)
-				draw_text(ecs+128,why-32,"delete")
-				draw_rectangle(ecs-64-size+130,why-32-size,ecs+64+size+130,why+32+size,true)
-				if(point_in_rectangle(mouse_x,mouse_y,ecs-64-size+128,why-32-size,ecs+64+size+128,why+32+size)&&mouse_check_button_pressed(mb_left))
-				{
-					array_delete(songlist,menunum[menuseleted][num].nummy,1)
-					file_delete(menunum[menuseleted][num].sly[0])
-					file_delete(menunum[menuseleted][num].sly[1])
-					array_delete(menunum[menuseleted],num,1)
-					refresh_songlist()
-					break;
-				}
-				if(smenu!=smenuold&&smenu==num)
-				{
-					if(songloaded!="")
-					{
-						audio_destroy_stream(songloaded)
-					}
-					var loaded=load_song_and_bpm(songlist[menunum[menuseleted][num].nummy][0],songlist[menunum[menuseleted][num].nummy][1])
-					if(loaded!=false&&!audio_is_playing(song))
-					{
-						alt=false
-						song=loaded[1]
-						audio_stop_all()
-						cbpm=loaded[0]
-						aud=audio_play_sound(loaded[1],1000,true)
-						songloaded=loaded[1]
-					}
-				}
-				if(array_length(songlist[menunum[menuseleted][num].nummy][2])>=5)
-				{
-					draw_text(ecs+256-42,why-32,number_to_difficulty(songlist[menunum[menuseleted][num].nummy][2][4]))
-				}
-				else
-				{
-					draw_text_ext(128+128,32,"hey! your save file is out of date and has some missing content, send your save file to protogen posting on the discord to have him fix it for you!",16,256)
-				}
-				draw_text(ecs+256-42,why,"score: "+string(songlist[menunum[menuseleted][num].nummy][2][0]))
-				draw_text(ecs+256-42,why+16,"accuracy: "+string(songlist[menunum[menuseleted][num].nummy][2][1]))
-				draw_text(ecs+256-42,why+32,"biggest combo: "+string(songlist[menunum[menuseleted][num].nummy][2][2]))
-			
+			}
+			if(array_length(songlist[menunum[menuseleted][num].nummy][2])>=5)
+			{
+				var color = number_to_difficulty_color(songlist[menunum[menuseleted][num].nummy][2][4])
+				draw_text_color(ecs+256-42,why-32,number_to_difficulty(songlist[menunum[menuseleted][num].nummy][2][4]),color,color,color,color,1)
+			}
+			else
+			{
+				draw_text_ext(128+128,32,"hey! your save file is out of date and has some missing content, send your save file to protogen posting on the discord to have him fix it for you!",16,256)
+			}
+			draw_text(ecs+256-42,why,"score: "+string(songlist[menunum[menuseleted][num].nummy][2][0]))
+			draw_text(ecs+256-42,why+16,"accuracy: "+string(songlist[menunum[menuseleted][num].nummy][2][1]))
+			draw_text(ecs+256-42,why+32,"biggest combo: "+string(songlist[menunum[menuseleted][num].nummy][2][2]))
+			if(why>=(room_height/1.1))
+			{
+				ecs+=64
+			}
 		}
 		if(menuseleted==2&&num==0)
 		{
