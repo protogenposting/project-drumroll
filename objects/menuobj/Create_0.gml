@@ -188,6 +188,12 @@ badge[20]={
 	sprite: badge21,
 	desc: "changes the move speed of every lane"
 }
+badge[21]={
+	active: false,
+	level: 40,
+	sprite: badge21,
+	desc: "slows a level down"
+}
 xp=0
 
 level=1
