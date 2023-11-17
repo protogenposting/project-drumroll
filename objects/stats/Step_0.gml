@@ -153,6 +153,10 @@ if(countdown<=0)
 	{
 		audio_sound_pitch(aud,audio_sound_get_pitch(aud)+0.1)
 	}
+	if(menuobj.badge[21].active&&audio_sound_get_pitch(aud)>0.5)
+	{
+		audio_sound_pitch(aud,audio_sound_get_pitch(aud)-0.01)
+	}
 	var barperlast=barper
 	var beatlen=60/bpm
 	var needle = audio_sound_get_track_position(aud)//+menuobj.offset;
