@@ -39,6 +39,9 @@ if(countdown<=0)
 	}
 	acc/=array_length(accuracy)
 	acc+=accadd
+	
+	audio_sound_gain(song,0.1,0)
+	
 	if(played&&!audio_is_playing(song))
 	{
 		if(scorey*(!menuobj.auto)>menuobj.songlist[sid][2][0])
